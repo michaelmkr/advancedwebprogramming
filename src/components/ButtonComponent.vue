@@ -1,7 +1,11 @@
 <template>
   <!-- Accent-colored raised button with ripple -->
   <button
-    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+    :class="
+    ['mdl-button mdl-js-button mdl-button--raised mdl-button--colored',
+     round ? 'mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored' : '',
+     flat ? 'mdl-button mdl-js-button mdl-js-ripple-effect' : '']">
+    <!-- v-bind:class="[active ? mdl-button : '', mdl-js-ripple-effect]"> -->
     Button
   </button>
 </template>
@@ -10,7 +14,8 @@
     export default {
         name: "ButtonComponent",
         props: {
-            classes: String
+            round: Boolean,
+            flat: Boolean
         }
     }
 </script>
