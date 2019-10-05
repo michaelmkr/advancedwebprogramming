@@ -7,15 +7,15 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
-import ButtonComponent from "../components/ButtonComponent";
+    // @ is an alias to /src
+    import HelloWorld from '@/components/HelloWorld.vue';
+    import ButtonComponent from "../components/ButtonComponent";
 
-export default {
-  name: 'home',
-  components: {
-      ButtonComponent,
-    HelloWorld,
-  },
-};
+    export default {
+        name: 'home',
+        components: {
+            ButtonComponent,
+            HelloWorld,
+        },
+    };
 </script>
