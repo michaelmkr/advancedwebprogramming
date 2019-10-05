@@ -2,7 +2,7 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <button-component classes="mdl-button mdl-js-button mdl-button--fab mdl-button--colored"></button-component>
+    <button-component></button-component>
   </div>
 </template>
 
