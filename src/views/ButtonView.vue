@@ -2,7 +2,7 @@
   <div>
     <h1>This is the new Button View</h1>
 
-    <button-component></button-component>
+    <button-component>Test out Slots</button-component>
 
   </div>
 
