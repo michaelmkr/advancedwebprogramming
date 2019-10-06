@@ -6,6 +6,10 @@
       <router-link to="/about">About</router-link>
       |
       <router-link to="/button">Button Test</router-link>
+      |
+      <router-link to="/map">Map</router-link>
+      |
+      <router-link to="/list">List</router-link>
     </div>
     <router-view/>
   </div>
