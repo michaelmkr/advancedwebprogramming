@@ -4,14 +4,17 @@
 
     <list-component></list-component>
 
+    <pokemon-list-component></pokemon-list-component>
+
   </div>
 </template>
 
 <script>
     import ListComponent from "../components/ListComponent.vue";
+    import PokemonListComponent from "../components/PokemonListComponent.vue";
     export default {
         name: "List",
-        components: {ListComponent}
+        components: {PokemonListComponent, ListComponent}
     }
 </script>
 

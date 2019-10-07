@@ -1,5 +1,5 @@
 <template>
-  <!-- Accent-colored raised button with ripple -->
+  <!-- TODO check for short ternary expression -->
   <button
     :class="
     ['mdl-button mdl-js-button mdl-button--raised mdl-button--colored',
@@ -18,6 +18,7 @@
             flat: Boolean
         }
     }
+    // TODO componentHandler.upgradeElement(button);
 </script>
 
 <style scoped>
