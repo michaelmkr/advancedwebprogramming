@@ -35,7 +35,7 @@
                     {text: "Get Map Component to work", done: false},
                     {text: "Debounce % Throttle", done: false},
                     {text: "API Specs", done: false},
-                    {text: "Dev Diary", done: false}
+                    {text: "Dev Diary", done: true}
                 ]
             }
         },

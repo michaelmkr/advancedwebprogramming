@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>I am the Pokemon List</h1>
-    <pokemon-list-component></pokemon-list-component>
+    <h1>This is the example of the TODO List</h1>
+    <list-component></list-component>
   </div>
 </template>
 

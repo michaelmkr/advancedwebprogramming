@@ -9,7 +9,9 @@
       |
       <router-link to="/map">Map</router-link>
       |
-      <router-link to="/list">List</router-link>
+      <router-link to="/list">Pokemon List</router-link>
+      |
+      <router-link to="/list-example">Todo List Example</router-link>
     </div>
     <router-view/>
   </div>
