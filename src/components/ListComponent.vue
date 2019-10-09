@@ -32,9 +32,9 @@
                     {text: "Create List Component", done: true},
                     {text: "Get List Component to work", done: true},
                     {text: "Create Map Component", done: true},
-                    {text: "Get Map Component to work", done: false},
+                    {text: "Get Map Component to work", done: true},
                     {text: "Debounce % Throttle", done: false},
-                    {text: "API Specs", done: false},
+                    {text: "API Specs", done: true},
                     {text: "Dev Diary", done: true}
                 ]
             }
