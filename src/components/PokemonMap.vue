@@ -9,7 +9,7 @@
     <button @click="panToMarker">Pan to Marker</button>
     <br> <br> <br>
     <gmap-map :center="center"
-              :zoom="5"
+              :zoom="10"
               class="gmap-map"
               ref="mapRef"
     >
@@ -33,7 +33,7 @@
         data() {
             return {
                 // center: {lat: 48.2139035, lng: 15.6297068}, // = FH
-                center: {lat: 0, lng: 0},
+                center: {lat: 48.2139035, lng: 15.6297068},
                 markers: [ // manually set to FH and Hospital
                     {position: {lat: 48.2139035, lng: 15.6297068}},
                     {position: {lat: 48.2138446, lng: 15.6298171}}
@@ -85,12 +85,12 @@
         },
 
         mounted() {
-            // this.geolocate();
+            //this.geolocate();
             this.getSightings();
         },
 
         methods: {
-            geolocate: function () {
+            geolocate: function () { //TODO watch -> bei Standortveränderung updaten
                 navigator.geolocation.getCurrentPosition(position => {
                     this.center = {
                         lat: position.coords.latitude,
@@ -99,7 +99,8 @@
                 });
             },
             getSightings: function () {
-                var url = 'https://virtserver.swaggerhub.com/pgmon/ws18/1.0.0/sightings/map/';
+               // var url = 'https://virtserver.swaggerhub.com/pgmon/ws18/1.0.0/sightings/map/';
+                var url = 'https://lbartner-01.media.fhstp.ac.at:4430/sightings/map/';
                 var getRequest = url + this.bounds.north + ',' + this.bounds.east + ',' + this.bounds.south + ',' + this.bounds.west;
                 axios
                     .get(getRequest)
