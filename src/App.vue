@@ -5,9 +5,11 @@
 <!--      |-->
       <router-link to="/">About</router-link>
       |
+      <router-link to="/list-example">Todo List Example</router-link>
+      |
       <router-link to="/map">Map</router-link>
       |
-      <router-link to="/list-example">Todo List Example</router-link>
+      <router-link to="/pokemon-list">Pokemon List</router-link>
     </div>
     <router-view/>
   </div>

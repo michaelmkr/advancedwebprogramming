@@ -26,5 +26,10 @@ export default new Router({
       name: 'list-example',
       component: () => import(/* webpackChunkName: "about" */ './views/ListExample.vue'),
     },
+    {
+      path: '/pokemon-list',
+      name: 'pokemon-list',
+      component: () => import(/* webpackChunkName: "about" */ './views/PokemonList.vue'),
+    },
   ],
 });
