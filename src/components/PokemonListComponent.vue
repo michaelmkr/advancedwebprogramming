@@ -15,17 +15,22 @@
       <!--      TODO @Hochi -> rausfinden wieso NaN und das bitte fixen-->
       <!--      TODO @Hochi -> Fehlermeldung: Property or method "id" is not defined-->
       <p> Name: {{ item.name }} <br>
-        <span ref="pokeID">Pokedex-ID: {{ item.pokedex-id }} coming soon..</span>
+        <span ref="pokeID">Pokedex-ID: coming soon..</span>
       </p>
-      <button @click="getDetails">show details</button>
-      <!--      TODO @Hochi die Details mit v-if und als div oder so anzeigen-->
+      <button>show details</button>
+      <!--      TODO @Hochi die Details mit v-if und als div oder so anzeigen
+                allerdings nur wenn darauf geklickt wird
+                also mit @click="getDetails(PokemonID)"
+                Die PokemonID musst du dir dann aus dem richtigen Array nehmen
+                ID ist im Array immer pokedex-id und in meinen Axios Funktionen als PokemonID jfyi
+      -->
     </div>
     <p>-----------------------------------------------------------------</p>
   </div>
 </template>
 
 <script>
-    import axios from "axios";
+    import axios from "../js/AxiosRequests";
 
     export default {
         name: "PokemonListComponent",
@@ -40,27 +45,22 @@
             }
         },
         methods: {
-            getDetails: function getPokemonDetails() {
-                console.log("Details for Pokemon with ID 25:");
-                const pokedexID = this.$refs.pokeID;
-                console.log(pokedexID);
-                axios
-                // TODO @Hochi die GET requests gehören mit denen aus dem eigenen Axios File getauscht
-                // TODO @Hochi getDetails funktioniert noch nicht richtig, das musst du bitte selber machen oder fixen
-                // .get('https://virtserver.swaggerhub.com/pgmon/ws18/1.0.0/pokemon/en/25')
-                    .get('https://lbartner-01.media.fhstp.ac.at:4430/pokemon/en/25')
-                    .then(response => (this.details = response.data));
-                console.log("Details: " + this.details);
-            }
+            getDetails: function (PokemonID) {
+                // TODO @Hochi bitte irgendwie mit der Funktion axios.getPokemonDetail(PokemonID) lösen
+                // Beispiel Code um getPokemonDetails zu verwenden
+                // @Hochi speichere dir halt data irgendwo im data() object als zB details, also zB mit this.details
+                // -> aktuell loggts dirs nur in der Konsole
+                axios.getPokemonDetails(PokemonID)
+                    .then(data => {
+                        console.log(data);
+                    })
+            },
         },
         mounted() {
-            axios
-            // TODO @Hochi die GET requests gehören mit denen aus dem eigenen Axios File getauscht
-            // die Funktion läuft aktuell gut, ersetz hier am besten den GET Request mit der Funktion aus dem Axios File
-            // .get('https://virtserver.swaggerhub.com/pgmon/ws18/1.0.0/pokemon/en')
-                .get('https://lbartner-01.media.fhstp.ac.at:4430/pokemon/en')
-                .then(response => (this.pokemon = response.data));
-            console.log(this.pokemon);
+            axios.getPokemon()
+                .then(data => {
+                    this.pokemon = data;
+                });
         }
     }
 </script>
