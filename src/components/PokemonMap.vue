@@ -23,9 +23,9 @@
 </template>
 
 <script>
-    import axios from "axios";
     import Button from "../views/ButtonView";
     import ButtonComponent from "./ButtonComponent";
+    import axios from "../js/AxiosRequests";
 
     export default {
         name: "PokemonMapComponent",
@@ -85,7 +85,7 @@
         },
 
         mounted() {
-            //this.geolocate();
+            this.geolocate();
             this.getSightings();
         },
 
@@ -99,12 +99,10 @@
                 });
             },
             getSightings: function () {
-               // var url = 'https://virtserver.swaggerhub.com/pgmon/ws18/1.0.0/sightings/map/';
-                var url = 'https://lbartner-01.media.fhstp.ac.at:4430/sightings/map/';
-                var getRequest = url + this.bounds.north + ',' + this.bounds.east + ',' + this.bounds.south + ',' + this.bounds.west;
-                axios
-                    .get(getRequest)
-                    .then(response => (this.pokemonSightings = response.data));
+                axios.getSightings(this.bounds.north, this.bounds.east, this.bounds.south, this.bounds.west)
+                    .then(data => {
+                        this.pokemonSightings = data;
+                    })
             },
             logSomething: function () {
                 console.log(this.pokemonSightings);
