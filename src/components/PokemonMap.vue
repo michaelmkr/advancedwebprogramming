@@ -2,44 +2,44 @@
   <div>
     <div>
       <h2>Try Google Map</h2>
-      <!--      https://alligator.io/vuejs/vue-google-maps/-->
-      <label>
-        <gmap-autocomplete
-          @place_changed="setPlace">
-        </gmap-autocomplete>
-        <button @click="addMarker">Add</button>
-      </label>
-      <br/>
-
     </div>
+    <button @click="logSomething">Log Something</button>
     <br>
-    <gmap-map
-      :center="center"
-      :zoom="12"
-      class="gmap-map"
+    <br>
+    <button @click="panToMarker">Pan to Marker</button>
+    <br> <br> <br>
+    <gmap-map :center="center"
+              :zoom="10"
+              class="gmap-map"
+              ref="mapRef"
     >
       <gmap-marker
         :key="index"
         :position="m.position"
-        @click="center=m.position"
-        v-for="(m, index) in markers"
+        v-for="(m, index) in pokemonSightings"
       ></gmap-marker>
     </gmap-map>
   </div>
 </template>
 
 <script>
-    export default {
-        name: "MapComponent",
+    import axios from "axios";
+    import Button from "../views/ButtonView";
+    import ButtonComponent from "./ButtonComponent";
 
+    export default {
+        name: "PokemonMapComponent",
+        components: {ButtonComponent, Button},
         data() {
             return {
+                // center: {lat: 48.2139035, lng: 15.6297068}, // = FH
                 center: {lat: 48.2139035, lng: 15.6297068},
-                markers: [
+                markers: [ // manually set to FH and Hospital
                     {position: {lat: 48.2139035, lng: 15.6297068}},
                     {position: {lat: 48.2138446, lng: 15.6298171}}
                 ],
                 places: [],
+                pokemonSightings: null,
                 currentPlace: null,
                 position: {
                     lat: 48.2138999,
@@ -85,34 +85,38 @@
         },
 
         mounted() {
-            // this.geolocate();
+            //this.geolocate();
+            this.getSightings();
         },
 
         methods: {
-            // receives a place object via the autocomplete component
-            setPlace(place) {
-                this.currentPlace = place;
-            },
-            addMarker() {
-                if (this.currentPlace) {
-                    const marker = {
-                        lat: this.currentPlace.geometry.location.lat(),
-                        lng: this.currentPlace.geometry.location.lng()
-                    };
-                    this.markers.push({position: marker});
-                    this.places.push(this.currentPlace);
-                    this.center = marker;
-                    this.currentPlace = null;
-                }
-            },
-            geolocate: function () {
+            geolocate: function () { //TODO watch -> bei Standortveränderung updaten
                 navigator.geolocation.getCurrentPosition(position => {
                     this.center = {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     };
                 });
-            }
+            },
+            getSightings: function () {
+               // var url = 'https://virtserver.swaggerhub.com/pgmon/ws18/1.0.0/sightings/map/';
+                var url = 'https://lbartner-01.media.fhstp.ac.at:4430/sightings/map/';
+                var getRequest = url + this.bounds.north + ',' + this.bounds.east + ',' + this.bounds.south + ',' + this.bounds.west;
+                axios
+                    .get(getRequest)
+                    .then(response => (this.pokemonSightings = response.data));
+            },
+            logSomething: function () {
+                console.log(this.pokemonSightings);
+                console.log(this.pokemonSightings[0].position.lat);
+                console.log(this.pokemonSightings[0].position.lng);
+            },
+            panToMarker: function () { // TODO currently hardcoded FH coordinates
+                this.$refs.mapRef.$mapPromise.then((map) => {
+                    map.setZoom(12);
+                    map.panTo({lat: 48.2139035, lng: 15.6297068});
+                })
+            },
         }
     };
 </script>
@@ -120,6 +124,6 @@
 <style scoped>
   .gmap-map {
     width: 100%;
-    height: 1000px;
+    height: 500px;
   }
 </style>

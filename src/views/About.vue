@@ -9,6 +9,7 @@
     <br><br><br><br><br>
     <h3>Find out more here:</h3>
     <a href="https://git.nwt.fhstp.ac.at/wasted-potential/awp/" target="_blank">https://git.nwt.fhstp.ac.at/wasted-potential/awp/</a>
+    <iframe src="https://www.youtube.com/embed/_lK4cX5xGiQ?autoplay=1"></iframe>
   </div>
 </template>
 

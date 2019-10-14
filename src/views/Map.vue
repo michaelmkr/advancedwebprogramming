@@ -1,15 +1,15 @@
 <template>
   <div>
     <h1>This is the map page</h1>
-    <MapComponent></MapComponent>
+    <pokemon-map-component></pokemon-map-component>
   </div>
 </template>
 
 <script>
-    import MapComponent from "../components/MapComponent.vue";
+    import PokemonMapComponent from "../components/PokemonMap";
     export default {
         name: "Map",
-        components: {MapComponent}
+        components: {PokemonMapComponent}
     }
 </script>
 
