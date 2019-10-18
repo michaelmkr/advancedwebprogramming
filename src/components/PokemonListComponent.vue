@@ -15,7 +15,7 @@
       <!--      TODO @Hochi -> rausfinden wieso NaN und das bitte fixen-->
       <!--      TODO @Hochi -> Fehlermeldung: Property or method "id" is not defined-->
       <p> Name: {{ item.name }} <br>
-        <span ref="pokeID">Pokedex-ID: coming soon..</span>
+        <span ref="pokeID">Pokedex-ID: {{ item["pokedex-id"] }}</span>
       </p>
       <button>show details</button>
       <!--      TODO @Hochi die Details mit v-if und als div oder so anzeigen
@@ -40,7 +40,8 @@
                 details: null,
                 testArray: [
                     {"name": "Pikachu", "pokedex-id": 25},
-                    {"name": "Raichu", "pokedex-id": 26}
+                    {"name": "Raichu", "pokedex-id": 26},
+                    {"name": "Julia", "pokedex-id": 23}
                 ]
             }
         },
