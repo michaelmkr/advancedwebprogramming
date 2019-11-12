@@ -4,10 +4,17 @@
       <router-link to="/">Home</router-link>
       |
       <router-link to="/about">About</router-link>
+      |
+      <router-link to="/ButtonView">ButtonView</router-link>
+      |
+      <router-link to="/ListView">ListView</router-link>
+      |
+      <router-link to="/MapView">MapView</router-link>
     </div>
     <router-view/>
   </div>
 </template>
+
 
 <style lang="scss">
   #app {
@@ -28,6 +35,22 @@
       &.router-link-exact-active {
         color: #42b983;
       }
+  }
+
+    h3 {
+      margin: 40px 0 0;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      display: inline-block;
+      margin: 0 10px;
+    }
+    a {
+      color: #42b983;
     }
   }
+
 </style>
