@@ -122,7 +122,11 @@
 
 <style scoped>
   .gmap-map {
-    width: 100%;
+    width: 70%;
     height: 500px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
   }
+
 </style>
