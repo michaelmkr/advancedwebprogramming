@@ -1,17 +1,4 @@
 <template>
-<<<<<<< HEAD
-  <div id="app">
-    <div id="nav">
-<!--      <router-link to="/">Home</router-link>-->
-<!--      |-->
-      <router-link to="/">About</router-link>
-      |
-      <router-link to="/list-example">Todo List Example</router-link>
-      |
-      <router-link to="/map">Map</router-link>
-      |
-      <router-link to="/pokemon-list">Pokemon List</router-link>
-=======
 <div class="demo-layout-transparent mdl-layout mdl-js-layout" id="app">
   <header class="mdl-layout__header ">
     <div class="mdl-layout__header-row">
@@ -28,7 +15,6 @@
       <router-link class="mdl-navigation__link" to="/list">Pokemon List</router-link>
       <router-link class="mdl-navigation__link" to="/list-example">Todo List Example</router-link>
       </nav>
->>>>>>> JFA
     </div>
   </header>
    <main class="mdl-layout__content">
@@ -38,4 +24,24 @@
 </template>
 
 <style lang="scss">
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+  }
+
+  #nav {
+    padding: 30px;
+
+    a {
+      font-weight: bold;
+      color: #2c3e50;
+
+      &.router-link-exact-active {
+        color: #42b983;
+      }
+    }
+  }
 </style>
