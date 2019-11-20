@@ -31,5 +31,20 @@ export default new Router({
       name: 'pokemon-list',
       component: () => import(/* webpackChunkName: "about" */ './views/PokemonList.vue'),
     },
+    {
+      path: '/ButtonView',
+      name: 'buttonview',
+      component: () => import('./views/ButtonView.vue'),
+    },
+    {
+      path: '/ListView',
+      name: 'listview',
+      component: () => import('./views/ListView.vue'),
+    },
+    {
+      path: '/MapView',
+      name: 'mapview',
+      component: () => import('./views/Mapview.vue'),
+    },
   ],
 });
