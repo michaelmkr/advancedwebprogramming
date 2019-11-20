@@ -7,15 +7,21 @@
 </template>
 
 <script>
-import GoogleMap from "./components/GoogleMap";
+import GoogleMap from '@/components/GoogleMap.vue';
+
+import {
+  getAllPokemon, getPokemonDetails, postSighting, getSightingByID, patchSightingByID, getPokemonList,
+} from '@/APICom/';
 
 export default {
-  name: "Mapview",
+  name: 'Mapview',
   components: {
-    GoogleMap
-  }
+    GoogleMap,
+  },
 };
-/*data() {
+
+
+/* data() {
     return {
         position: {
             lat: 48.2138999,
@@ -58,9 +64,5 @@ export default {
             }
         ]
     }
-  }*/
+  } */
 </script>
-
-
-
-

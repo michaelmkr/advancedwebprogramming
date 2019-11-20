@@ -6,7 +6,7 @@
 
 <script>
 // @ is an alias to /src
-import ButtonComponent from "../components/ButtonComponent";
+import ButtonComponent from '../components/ButtonComponent';
 
 export default {
   name: 'home',

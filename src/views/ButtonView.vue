@@ -8,12 +8,12 @@
 </template>
 
 <script>
-import ButtonComponent from "@/components/ButtonComponent.vue";
+import ButtonComponent from '@/components/ButtonComponent.vue';
 
 export default {
   name: 'buttonview',
   components: {
     ButtonComponent,
-  }
-}
+  },
+};
 </script>

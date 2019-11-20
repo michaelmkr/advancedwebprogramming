@@ -32,9 +32,9 @@ export default new Router({
       component: () => import('./views/ListView.vue'),
     },
     {
-      path: '/App',
-      name: 'App',
+      path: '/MapView',
+      name: 'mapview',
       component: () => import('./views/Mapview.vue'),
-    }
+    },
   ],
 });
