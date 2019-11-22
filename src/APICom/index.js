@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = String('https://lbartner-01.media.fhstp.ac.at:4430');
+const baseURL = String('https://virtserver.swaggerhub.com/pgmon/ws18/1.0.0');
 
 const apiCom = axios.create({
   baseURL,
