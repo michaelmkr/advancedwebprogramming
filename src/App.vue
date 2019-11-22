@@ -1,26 +1,28 @@
 <template>
-<div class="demo-layout-transparent mdl-layout mdl-js-layout" id="app">
-  <header class="mdl-layout__header ">
-    <div class="mdl-layout__header-row">
-      <!-- Title -->
-      <span class="mdl-layout-title">Pokemon Go</span>
-      <!-- Add spacer, to align navigation to the right -->
-      <div class="mdl-layout-spacer"></div>
-      <!-- Navigation -->
-      <nav class="mdl-navigation">
-         <router-link class="mdl-navigation__link" to="/">Home</router-link>
-      <router-link class="mdl-navigation__link" to="/about">About</router-link>
-      <router-link class="mdl-navigation__link" to="/button">Button Test</router-link>
-      <router-link class="mdl-navigation__link" to="/map">Map</router-link>
-      <router-link class="mdl-navigation__link" to="/list">Pokemon List</router-link>
-      <router-link class="mdl-navigation__link" to="/list-example">Todo List Example</router-link>
-      </nav>
-    </div>
-  </header>
-   <main class="mdl-layout__content">
+  <div class="demo-layout-transparent mdl-layout mdl-js-layout" id="app">
+    <header class="mdl-layout__header ">
+      <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title">Pokemon Go</span>
+        <!-- Add spacer, to align navigation to the right -->
+        <div class="mdl-layout-spacer"></div>
+        <!-- Navigation -->
+        <nav class="mdl-navigation">
+          <router-link class="mdl-navigation__link" to="/">Home</router-link>
+          <router-link class="mdl-navigation__link" to="/about">About</router-link>
+          <router-link class="mdl-navigation__link" to="/button">Button Test</router-link>
+          <router-link class="mdl-navigation__link" to="/map">Map</router-link>
+          <router-link class="mdl-navigation__link" to="/list">Pokemon List</router-link>
+          <router-link class="mdl-navigation__link" to="/list-example">Todo List Example
+          </router-link>
+          <router-link class="mdl-navigation__link" to="/register">Register</router-link>
+        </nav>
+      </div>
+    </header>
+    <main class="mdl-layout__content">
       <router-view/>
-  </main>
-</div>
+    </main>
+  </div>
 </template>
 
 <style lang="scss">
