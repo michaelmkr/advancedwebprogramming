@@ -16,6 +16,7 @@
           <router-link class="mdl-navigation__link" to="/list-example">Todo List Example
           </router-link>
           <router-link class="mdl-navigation__link" to="/register">Register</router-link>
+          <router-link class="mdl-navigation__link" to="/login">Login</router-link>
         </nav>
       </div>
     </header>
