@@ -4,12 +4,32 @@ import mutations from './mutations'
 import * as actions from './actions'
 import * as getters from './getters'
 
-Vue.use(Vuex)
+Vue.use(Vuex);
+
+const state = {
+  position: {
+    lat: 0,
+    lng: 0
+  },
+  bounds: {
+    east: 0,
+    north: 0,
+    south: 0,
+    west: 0
+  },
+  pokeDex: [],
+  pokeList: [],
+  authToken: undefined,
+  snackBar: {
+    timestamp: undefined,
+    message: undefined
+  },
+  pokeDistanceList: []
+};
+
 
 export default new Vuex.Store({
-  state: {
-    demo: 0
-  },
+  state,
   mutations,
   actions,
   getters,
