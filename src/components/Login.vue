@@ -2,14 +2,14 @@
   <div>
     <div>
       <label>E-Mail: </label>
-      <input v-model="email">
+      <input v-model="email" v-model.trim="email">
       <br>
       <span v-if="!$v.email.required">Email is required.</span>
       <span v-else-if="!$v.email.email">Not a valid email.</span>
     </div>
     <div>
       <label>Passwort: </label>
-      <input v-model="password">
+      <input v-model="password" v-model.trim="password">
       <br>
       <span v-if="!$v.password.required">Password is required.</span>
     </div>
