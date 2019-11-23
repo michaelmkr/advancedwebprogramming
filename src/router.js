@@ -24,20 +24,22 @@ export default new Router({
     {
       path: '/register',
       name: 'register',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/Registration.vue'),
+      component: () => import('./views/Registration.vue'),
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('./views/Login.vue'),
     },
     {
       path: '/list-example',
       name: 'list-example',
-      component: () => import(/* webpackChunkName: "about" */ './views/ListExample.vue'),
+      component: () => import('./views/ListExample.vue'),
     },
     {
       path: '/pokemon-list',
       name: 'pokemon-list',
-      component: () => import(/* webpackChunkName: "about" */ './views/PokemonList.vue'),
+      component: () => import('./views/PokemonList.vue'),
     },
     {
       path: '/ButtonView',
