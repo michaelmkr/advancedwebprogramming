@@ -9,12 +9,7 @@
         <!-- Navigation -->
         <nav class="mdl-navigation">
           <router-link class="mdl-navigation__link" to="/">Home</router-link>
-          <router-link class="mdl-navigation__link" to="/about">About</router-link>
-          <router-link class="mdl-navigation__link" to="/button">Button Test</router-link>
           <router-link class="mdl-navigation__link" to="/map">Map</router-link>
-          <router-link class="mdl-navigation__link" to="/list">Pokemon List</router-link>
-          <router-link class="mdl-navigation__link" to="/list-example">Todo List Example
-          </router-link>
           <router-link class="mdl-navigation__link" to="/register">Register</router-link>
           <router-link class="mdl-navigation__link" to="/login">Login</router-link>
         </nav>
