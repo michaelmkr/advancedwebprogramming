@@ -25,7 +25,7 @@
 <!-- Colored raised button -->
 <button @click="panToMarker" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
   <i class="material-icons"> my_location</i>
-  Pin to Marker
+  Pan to Marker
 </button>
 
 
