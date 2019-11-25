@@ -14,8 +14,14 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: () => import('./views/About.vue'),
+      component: () => import('./views/Home.vue'),
       //component: Home,
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: () => import('./views/About.vue'),
+      //component: About,
     },
     {
       path: '/map',

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h2>Try Google Map</h2>
+
       <!--      https://alligator.io/vuejs/vue-google-maps/-->
       <label>
         <gmap-autocomplete

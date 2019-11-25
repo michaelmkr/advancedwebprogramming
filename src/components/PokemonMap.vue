@@ -1,13 +1,8 @@
 <template>
   <div>
     <div>
-      <h2>Try Google Map</h2>
     </div>
-    <button @click="logSomething">Log Something</button>
-    <br>
-    <br>
-    <button @click="panToMarker">Pan to Marker</button>
-    <br> <br> <br>
+
     <gmap-map :center="center"
               :zoom="10"
               class="gmap-map"
@@ -19,6 +14,37 @@
         v-for="(m, index) in pokemonSightings"
       ></gmap-marker>
     </gmap-map>
+    <br> <br> <br>
+
+<!-- Colored FAB button -->
+<button @click="logSomething" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+  <i class="material-icons">add</i>
+</button>
+<br>
+
+<!-- Colored raised button -->
+<button @click="panToMarker" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+  <i class="material-icons"> my_location</i>
+  Pin to Marker
+</button>
+
+
+<h1> Aktuelle Sichtungen</h1>
+
+<!-- Sichtung Design -->
+
+
+<div class="demo-card-square mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title mdl-card--expand">
+    <h2 class="mdl-card__title-text">Pikachu</h2>
+  </div>
+  <div class="mdl-card__actions mdl-card--border">
+    <router-link class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" to="/">Details
+
+    </router-link>
+  </div>
+</div>
+
   </div>
 </template>
 
@@ -121,11 +147,38 @@
 
 <style scoped>
   .gmap-map {
-    width: 70%;
+    width: 100%;
     height: 500px;
     display: block;
     margin-left: auto;
     margin-right: auto
   }
+
+  .mdl-button--fab {
+    margin: 40px;
+    margin-top: -100px;
+    float:center;
+  }
+.mdl-button--raised {
+  float:left;
+   margin-top: -80px;
+}
+
+.demo-card-square.mdl-card {
+  width: 320px;
+  height: 320px;
+  margin: 50px;
+}
+.demo-card-square > .mdl-card__title {
+  color: #fff;
+  background:
+    url('../assets/Pikachu.jpg') center / cover;
+}
+
+.mdl-card__title-text{
+  font-weight: bold;
+}
+
+
 
 </style>
