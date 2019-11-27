@@ -22,7 +22,7 @@ export function patchUserDetail(payload) {
   return apiCom.patch('/users/details', payload);
 }
 
-//test push
+
 // Pokemon:
 
 export function getAllPokemon({ language }) {
@@ -56,7 +56,7 @@ export function getPokemonList({
 
 
 // System:
-/*
+
 export function getLanguage() {
   return apiCom.get('/system/languages');
-}*/
+}
