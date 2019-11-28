@@ -52,10 +52,13 @@
     import Button from "../views/ButtonView";
     import ButtonComponent from "./ButtonComponent";
     import axios from "../js/AxiosRequests";
+    import Vuex, { mapGetters, mapActions } from 'vuex';
 
     export default {
+
         name: "PokemonMapComponent",
         components: {ButtonComponent, Button},
+
         data() {
             return {
                 // center: {lat: 48.2139035, lng: 15.6297068}, // = FH
@@ -109,6 +112,10 @@
                 ]
             }
         },
+        //VUEX
+        created(){
+          this.geolocate();
+        },
 
         mounted() {
             this.geolocate();
@@ -116,14 +123,16 @@
         },
 
         methods: {
-            geolocate: function () { //TODO watch -> bei Standortveränderung updaten
+            /*geolocate: function () { //TODO watch -> bei Standortveränderung updaten
                 navigator.geolocation.getCurrentPosition(position => {
                     this.center = {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     };
                 });
-            },
+            },*/
+            ...mapActions(['geolocate']),
+
             getSightings: function () {
                 axios.getSightings(this.bounds.north, this.bounds.east, this.bounds.south, this.bounds.west)
                     .then(data => {
@@ -141,7 +150,9 @@
                     map.panTo({lat: 48.2139035, lng: 15.6297068});
                 })
             },
+
         }
+
     };
 </script>
 
