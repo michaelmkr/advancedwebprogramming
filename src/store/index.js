@@ -26,7 +26,7 @@ const state = {
   },
   pokeDistanceList: [],
   toDo: [
-    { text: 'Create Button Component', done: true, id: '1' },
+    { text: 'Test Test Create Button Component', done: true, id: '1' },
     { text: 'Finish all tasks for Excercise 1 and Preparation Phase', done: false, id: '2' },
     { text: 'Create List View', done: true, id: '3' },
     { text: 'Create Map View', done: true, id: '4' },

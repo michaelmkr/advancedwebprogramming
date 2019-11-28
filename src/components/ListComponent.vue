@@ -1,7 +1,13 @@
 <template>
   <div id="app">
     <h2>Todos:</h2>
-    <ol>
+    <div class="toDos">
+      <div v-for="toDo in allToDos" :key="toDo.id" class="toDo">
+        {{ toDo.text }}
+
+      </div>
+    </div>
+   <!-- <ol>
       <li v-for="todo in todos">
         <label>
           <input type="checkbox"
@@ -15,14 +21,19 @@
         </span>
         </label>
       </li>
-    </ol>
+    </ol>-->
   </div>
 </template>
 
 <script>
+
+  //import '@/store/getters.js';
+  import { mapGetters } from 'vuex';
+
     export default {
-        name: "ListComponent",
-        data() {
+        name: 'ListComponent',
+        computed: mapGetters([ 'allToDos' ]),
+        /*data() {
             return {
                 todos: [
                     {text: "Create Button Component", done: true},
@@ -38,12 +49,12 @@
                     {text: "Dev Diary", done: true}
                 ]
             }
-        },
-        methods: {
+        },*/
+        /*methods: {
             toggle: function(todo){
                 todo.done = !todo.done
             }
-        }
+        }*/
     }
 
 </script>
