@@ -1,3 +1,5 @@
+
+
 export const getDemo = state => {
   return 'some random number: ' + Math.ceil((state.demo * 10) % 5)
 };
@@ -9,3 +11,7 @@ export const getPokeDex = state => state.pokeDex;
 export const getAuthToken = state => state.authToken;
 export const getSnackBar = state => state.snackBar;
 export const getPokeDistanceList = state => state.pokeDistanceList;
+
+const getters = {
+  allToDos: state => state.toDo,
+};
