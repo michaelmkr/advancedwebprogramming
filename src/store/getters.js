@@ -1,5 +1,3 @@
-
-
 export const getDemo = state => `some random number: ${Math.ceil((state.demo * 10) % 5)}`;
 
 export const getPosition = state => state.position;
