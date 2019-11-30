@@ -11,6 +11,7 @@ export const getSightings = ({ commit }, payload) => {
       response.data.forEach((item) => {
         list.push(item);
       });
+      console.log(list);
       commit(types.POKELIST, list);
     });
 };

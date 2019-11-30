@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div>
-    </div>
-
     <gmap-map :center="center"
               :zoom="10"
               class="gmap-map"
@@ -54,7 +51,6 @@
 <script>
 import Vuex, { mapGetters, mapActions } from 'vuex';
 import ButtonComponent from './ButtonComponent';
-import axios from '../js/AxiosRequests';
 import { getSightings } from '../store/actions';
 
 export default {
