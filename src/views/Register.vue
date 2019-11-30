@@ -59,6 +59,34 @@ export default {
     password: { required, minLength: minLength(8) },
     passwordConfirm: { required, sameAsPassword: sameAs('password') },
   },
+  // TODO change error message in computed()
+  computed: {
+    errorEmail(){
+      let error;
+      if(!this.$v.$error){
+        error = '';
+      } else if (this.$v.email.required === false){
+        error = 'E-Mail is required!'
+      }
+      else if (this.$v.email.email === false){
+        error = 'E-Mail is not a valid E-Mail!'
+      }
+      return error;
+    },
+    errorPassword(){
+      let error;
+      if(!this.$v.$error){
+        error = '';
+      } else if (this.$v.password.required === false){
+        error = 'Password is required!'
+      }
+      else if (this.$v.password.minLength === false){
+        error = 'Password must contain at least 8 !'
+      }
+      return error;
+    },
+    errorPassword2(){}
+  },
   methods: {
     submit(event) {
       this.$v.$touch();
@@ -72,7 +100,4 @@ export default {
     },
   },
 };
-
-// TODO change error message in computed()
-
 </script>
