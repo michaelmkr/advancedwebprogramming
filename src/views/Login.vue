@@ -42,7 +42,7 @@
 
   <form action="#">
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input class="mdl-textfield__input" type="text" id="sample3" v-model="password" v-model.trim="password">
+    <input class="mdl-textfield__input" type="password" id="sample3" v-model="password" v-model.trim="password">
     <label class="mdl-textfield__label" for="sample3">Passwort</label>
     <span v-if="!$v.password.required">Password is required.</span>
   </div>

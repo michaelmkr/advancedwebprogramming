@@ -17,14 +17,14 @@
       <span v-else-if="!$v.email.email">Not a valid email.</span>
     </div>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <input class="mdl-textfield__input" id="sample3" type="text" v-model="password"
+      <input class="mdl-textfield__input" id="sample3" type="password" v-model="password"
              v-model.trim="password">
       <label class="mdl-textfield__label" for="sample3">Passwort...</label>
       <span v-if="!$v.password.required">Password is required.</span>
       <span v-else-if="!$v.password.minLength">Must contain at least 8 characters.</span>
     </div>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <input class="mdl-textfield__input" id="sample3" type="text" v-model="passwordConfirm"
+      <input class="mdl-textfield__input" id="sample3" type="password" v-model="passwordConfirm"
              v-model.trim="passwordConfirm">
       <label class="mdl-textfield__label" for="sample3">Passwort wiederholen...</label>
       <span v-if="!$v.passwordConfirm.required">Password is required.</span>
