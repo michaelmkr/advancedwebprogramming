@@ -12,7 +12,3 @@ export default {
   components: { PokemonMapComponent },
 };
 </script>
-
-<style scoped>
-
-</style>

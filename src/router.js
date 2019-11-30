@@ -41,19 +41,5 @@ export default new Router({
       component: () => import('./views/Login.vue'),
       // component: Login,
     },
-
-
-    // obsolete
-    {
-      path: '/MapView',
-      name: 'mapview',
-      component: () => import('./views/Mapview.vue'),
-    },
-    {
-      path: '/pokemon-list',
-      name: 'pokemon-list',
-      component: () => import('./views/PokemonList.vue'),
-    },
-
   ],
 });
