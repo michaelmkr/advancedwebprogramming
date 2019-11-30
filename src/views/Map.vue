@@ -5,11 +5,12 @@
 </template>
 
 <script>
-    import PokemonMapComponent from "../components/PokemonMap";
-    export default {
-        name: "Map",
-        components: {PokemonMapComponent}
-    }
+import PokemonMapComponent from '../components/PokemonMap';
+
+export default {
+  name: 'Map',
+  components: { PokemonMapComponent },
+};
 </script>
 
 <style scoped>

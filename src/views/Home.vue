@@ -6,16 +6,18 @@
   </div>
 
   <div class="mdl-card__supporting-text">
+    <ToggleComponent v-model="Toggle1">  ich bin ein Test </ToggleComponent>
+    <ToggleComponent v-model="Toggle2">  ich bin der Beweis </ToggleComponent>
     <!-- Textfield with Floating Label -->
     <h1> Poke Fun </h1>
     <p> Pokémon Go ist ein Spiel für Handheld-Mobilgeräte wie Smartphones und Tabletcomputer.
       In dem Spiel können die Spieler virtuelle Fantasiewesen fangen,
       entwickeln und in virtuellen Kämpfen gegeneinander antreten lassen.
       Bis Ende 2018 wurde das Spiel über eine Milliarde Mal heruntergeladen. </p>
-  </div>
+
   </div>
 
-</template
+  </div>
 
 
 </template>
@@ -24,17 +26,21 @@
 // @ is an alias to /src
 
 export default {
-  name: 'home',
-  components: {
 
-  },
-};
+   data (){
+    return{
+    Toggle1:true,
+    Toggle2:false
+    }
+   },
+  name: 'home',
+}
 </script>
 
 <style scoped>
 .demo-card-wide.mdl-card {
   width:100%;
-
+  float:center;
 
 }
 .demo-card-wide > .mdl-card__title {

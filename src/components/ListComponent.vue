@@ -20,31 +20,31 @@
 </template>
 
 <script>
-    export default {
-        name: "ListComponent",
-        data() {
-            return {
-                todos: [
-                    {text: "Create Button Component", done: true},
-                    {text: "Finish all tasks for Excercise 1 and Preparation Phase", done: false},
-                    {text: "Create List View", done: true},
-                    {text: "Create Map View", done: true},
-                    {text: "Create List Component", done: true},
-                    {text: "Get List Component to work", done: true},
-                    {text: "Create Map Component", done: true},
-                    {text: "Get Map Component to work", done: true},
-                    {text: "Debounce % Throttle", done: false},
-                    {text: "API Specs", done: true},
-                    {text: "Dev Diary", done: true}
-                ]
-            }
-        },
-        methods: {
-            toggle: function(todo){
-                todo.done = !todo.done
-            }
-        }
-    }
+export default {
+  name: 'ListComponent',
+  data() {
+    return {
+      todos: [
+        { text: 'Create Button Component', done: true },
+        { text: 'Finish all tasks for Excercise 1 and Preparation Phase', done: false },
+        { text: 'Create List View', done: true },
+        { text: 'Create Map View', done: true },
+        { text: 'Create List Component', done: true },
+        { text: 'Get List Component to work', done: true },
+        { text: 'Create Map Component', done: true },
+        { text: 'Get Map Component to work', done: true },
+        { text: 'Debounce % Throttle', done: false },
+        { text: 'API Specs', done: true },
+        { text: 'Dev Diary', done: true },
+      ],
+    };
+  },
+  methods: {
+    toggle(todo) {
+      todo.done = !todo.done;
+    },
+  },
+};
 
 </script>
 

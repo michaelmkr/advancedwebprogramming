@@ -10,12 +10,12 @@
 
 
 <script>
-    import ButtonComponent from "../components/ButtonComponent";
+import ButtonComponent from '../components/ButtonComponent';
 
-    export default {
-        name: "button",
-        components: {ButtonComponent}
-    }
+export default {
+  name: 'button',
+  components: { ButtonComponent },
+};
 </script>
 
 <style scoped>

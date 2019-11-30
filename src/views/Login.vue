@@ -18,8 +18,6 @@
 -->
 
 
-
-
 <!-- Julias Log In-->
 
   <template>
@@ -61,7 +59,7 @@
     </button>
   </div>-->
 </div>
-</template
+</template>
 
 
 <script>

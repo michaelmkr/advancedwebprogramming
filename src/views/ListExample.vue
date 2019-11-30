@@ -6,11 +6,12 @@
 </template>
 
 <script>
-    import ListComponent from "../components/ListComponent.vue";
-    export default {
-        name: "List",
-        components: {ListComponent}
-    }
+import ListComponent from '../components/ListComponent.vue';
+
+export default {
+  name: 'List',
+  components: { ListComponent },
+};
 </script>
 
 <style scoped>

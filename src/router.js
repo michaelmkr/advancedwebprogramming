@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import * as Home from './views/About'
-import * as Map from './views/Map'
-import * as Register from './views/Register'
-import * as Login from './views/Login'
+import * as Home from './views/About';
+import * as Map from './views/Map';
+import * as Register from './views/Register';
+import * as Login from './views/Login';
+
 
 Vue.use(Router);
 
@@ -15,35 +16,35 @@ export default new Router({
       path: '/',
       name: 'home',
       component: () => import('./views/Home.vue'),
-      //component: Home,
+      // component: Home,
     },
     {
       path: '/about',
       name: 'about',
       component: () => import('./views/About.vue'),
-      //component: About,
+      // component: About,
     },
     {
       path: '/map',
       name: 'map',
       component: () => import('./views/Map.vue'),
-      //component: Map,
+      // component: Map,
     },
     {
       path: '/register',
       name: 'register',
       component: () => import('./views/Register.vue'),
-      //component: Register,
+      // component: Register,
     },
     {
       path: '/login',
       name: 'login',
       component: () => import('./views/Login.vue'),
-      //component: Login,
+      // component: Login,
     },
 
 
-// obsolete
+    // obsolete
     {
       path: '/MapView',
       name: 'mapview',

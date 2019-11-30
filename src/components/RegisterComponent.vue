@@ -45,40 +45,42 @@
 </template>
 
 <script>
-    import {required, email, minLength, sameAs} from "vuelidate/lib/validators";
+import {
+  required, email, minLength, sameAs,
+} from 'vuelidate/lib/validators';
 
-    export default {
-        name: "RegisterComponent",
+export default {
+  name: 'RegisterComponent',
 
-        data() {
-            return {
-                form: {
-                    name: "",
-                    email: "",
-                    password: "",
-                    password2: ""
-                }
-            };
-        },
-
-        validations: {
-            form: {
-                name: {required, min: minLength(3)},
-                email: {required, email},
-                password: {required, min: minLength(8)},
-                password2: {required, sameAsPassword: sameAs('password')}
-            }
-        },
-
-        methods: {
-            submit() {
-                this.$v.form.$touch();
-                if (this.$v.form.$error) return;
-                // to form submit after this
-                alert('Form submitted')
-            }
-        }
+  data() {
+    return {
+      form: {
+        name: '',
+        email: '',
+        password: '',
+        password2: '',
+      },
     };
+  },
+
+  validations: {
+    form: {
+      name: { required, min: minLength(3) },
+      email: { required, email },
+      password: { required, min: minLength(8) },
+      password2: { required, sameAsPassword: sameAs('password') },
+    },
+  },
+
+  methods: {
+    submit() {
+      this.$v.form.$touch();
+      if (this.$v.form.$error) return;
+      // to form submit after this
+      alert('Form submitted');
+    },
+  },
+};
 </script>
 
 <style>

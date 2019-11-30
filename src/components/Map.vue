@@ -28,77 +28,77 @@
 
 
 <script>
-    import {loaded} from 'vue2-google-maps';
+import { loaded } from 'vue2-google-maps';
 
-    import debounce from 'lodash.debounce'
+import debounce from 'lodash.debounce';
 
-    import {mapActions, mapGetters} from 'vuex'
+import { mapActions, mapGetters } from 'vuex';
 
-    export default {
-        name: 'g-map',
-        data() {
-            return {
-                center: {
-                    lat: 0,
-                    lng: 0
-                },
-                zoom: 17,
-                options: {
-                    draggable: false,
-                    zoomControl: true,
-                    mapTypeControl: false,
-                    scaleControl: false,
-                    streetViewControl: false,
-                    rotateControl: false,
-                    fullscreenControl: false,
-                }
-            }
-        },
-        computed: {
-            ...mapGetters([
-                'getPokeList',
-                'getPosition',
-                'getPokeDex',
-                'getBounds'
-            ])
-        },
-        methods: {
-            ...mapActions([
-                // 'setBounds',
-                'setPosition',
-                // 'setPokeDex',
-                // 'setIsNight'
-            ]),
-            setBoundsD: debounce(function (bounds) {
-                return this.setBounds(bounds)
-            }, 500),
-            centerPosition() {
-                this.$refs.googleMap.resizePreserveCenter()
-            },
-            getNameFromId(id) {
-                return this.getPokeDex.find(item => item.id === id).name
-            },
-            getIdentifierFromId(id) {
-                return this.getPokeDex.find(item => item.id === id).identifier
-            },
-        },
-        created() {
-            this.setPokeDex();
-            this.setPosition();
-            loaded //TODO check for loaded function
-                .then(() => {
-                    this.options.zoomControlOptions = {
-                        position: google.maps.ControlPosition.LEFT_TOP // eslint-disable-line no-undef
-                    };
-                    this.centerPosition();
-                    window.addEventListener('resize', this.centerPosition);
-                    window.addEventListener('orientationchange', this.centerPosition)
-                });
-        },
-        activated() {
-            this.centerPosition()
-        }
-    }
+export default {
+  name: 'g-map',
+  data() {
+    return {
+      center: {
+        lat: 0,
+        lng: 0,
+      },
+      zoom: 17,
+      options: {
+        draggable: false,
+        zoomControl: true,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        rotateControl: false,
+        fullscreenControl: false,
+      },
+    };
+  },
+  computed: {
+    ...mapGetters([
+      'getPokeList',
+      'getPosition',
+      'getPokeDex',
+      'getBounds',
+    ]),
+  },
+  methods: {
+    ...mapActions([
+      // 'setBounds',
+      'setPosition',
+      // 'setPokeDex',
+      // 'setIsNight'
+    ]),
+    setBoundsD: debounce(function (bounds) {
+      return this.setBounds(bounds);
+    }, 500),
+    centerPosition() {
+      this.$refs.googleMap.resizePreserveCenter();
+    },
+    getNameFromId(id) {
+      return this.getPokeDex.find(item => item.id === id).name;
+    },
+    getIdentifierFromId(id) {
+      return this.getPokeDex.find(item => item.id === id).identifier;
+    },
+  },
+  created() {
+    this.setPokeDex();
+    this.setPosition();
+    loaded // TODO check for loaded function
+      .then(() => {
+        this.options.zoomControlOptions = {
+          position: google.maps.ControlPosition.LEFT_TOP, // eslint-disable-line no-undef
+        };
+        this.centerPosition();
+        window.addEventListener('resize', this.centerPosition);
+        window.addEventListener('orientationchange', this.centerPosition);
+      });
+  },
+  activated() {
+    this.centerPosition();
+  },
+};
 </script>
 
 <style scoped style="scss">
