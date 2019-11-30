@@ -13,8 +13,6 @@
       <router-link class="mdl-navigation__link" to="/">Home</router-link>
       <router-link class="mdl-navigation__link" to="/about">About</router-link>
       <router-link class="mdl-navigation__link" to="/map">Map</router-link>
-      <router-link class="mdl-navigation__link" to="/list">Pokemon List</router-link>
-      <router-link class="mdl-navigation__link" to="/list-example">Todo List Example</router-link>
       <router-link class="mdl-navigation__link" to="/login">Anmelden</router-link>
           </nav>
         </div>
@@ -25,7 +23,6 @@
           <router-link class="mdl-navigation__link" to="/">Home</router-link>
           <router-link class="mdl-navigation__link" to="/about">About</router-link>
           <router-link class="mdl-navigation__link" to="/map">Map</router-link>
-          <router-link class="mdl-navigation__link" to="/list">Pokemon List</router-link>
            <router-link class="mdl-navigation__link" to="/login">Anmelden</router-link>
         </nav>
     </div>

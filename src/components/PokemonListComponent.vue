@@ -30,40 +30,40 @@
 </template>
 
 <script>
-    import axios from "../js/AxiosRequests";
+import axios from '../js/AxiosRequests';
 
-    export default {
-        name: "PokemonListComponent",
-        data() {
-            return {
-                pokemon: null,
-                details: null,
-                testArray: [
-                    {"name": "Pikachu", "pokedex-id": 25},
-                    {"name": "Raichu", "pokedex-id": 26},
-                    {"name": "Julia", "pokedex-id": 23}
-                ]
-            }
-        },
-        methods: {
-            getDetails: function (PokemonID) {
-                // TODO @Hochi bitte irgendwie mit der Funktion axios.getPokemonDetail(PokemonID) lösen
-                // Beispiel Code um getPokemonDetails zu verwenden
-                // @Hochi speichere dir halt data irgendwo im data() object als zB details, also zB mit this.details
-                // -> aktuell loggts dirs nur in der Konsole
-                axios.getPokemonDetails(PokemonID)
-                    .then(data => {
-                        console.log(data);
-                    })
-            },
-        },
-        mounted() {
-            axios.getPokemon()
-                .then(data => {
-                    this.pokemon = data;
-                });
-        }
-    }
+export default {
+  name: 'PokemonListComponent',
+  data() {
+    return {
+      pokemon: null,
+      details: null,
+      testArray: [
+        { name: 'Pikachu', 'pokedex-id': 25 },
+        { name: 'Raichu', 'pokedex-id': 26 },
+        { name: 'Julia', 'pokedex-id': 23 },
+      ],
+    };
+  },
+  methods: {
+    getDetails(PokemonID) {
+      // TODO @Hochi bitte irgendwie mit der Funktion axios.getPokemonDetail(PokemonID) lösen
+      // Beispiel Code um getPokemonDetails zu verwenden
+      // @Hochi speichere dir halt data irgendwo im data() object als zB details, also zB mit this.details
+      // -> aktuell loggts dirs nur in der Konsole
+      axios.getPokemonDetails(PokemonID)
+        .then((data) => {
+          console.log(data);
+        });
+    },
+  },
+  mounted() {
+    axios.getPokemon()
+      .then((data) => {
+        this.pokemon = data;
+      });
+  },
+};
 </script>
 
 <style scoped>

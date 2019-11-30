@@ -4,7 +4,7 @@ import router from './router';
 import store from './store';
 import './registerServiceWorker';
 import * as VueGoogleMaps from 'vue2-google-maps';
-import Vuelidate from "vuelidate/src";
+import Vuelidate from 'vuelidate/src';
 
 Vue.config.productionTip = false;
 
@@ -26,7 +26,7 @@ Vue.use(VueGoogleMaps, {
     key: 'AIzaSyDthJr1M70ma5q3pD3HeVCmWNlNsK9NOAA',
     libraries: 'places',
   },
-  installComponents: true
+  installComponents: true,
 });
 
 Vue.use(Vuelidate);

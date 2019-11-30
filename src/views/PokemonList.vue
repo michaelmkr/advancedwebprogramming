@@ -6,12 +6,12 @@
 </template>
 
 <script>
-    import ListComponent from "../components/ListComponent.vue";
-    import PokemonListComponent from "../components/PokemonListComponent.vue";
-    export default {
-        name: "List",
-        components: {PokemonListComponent, ListComponent}
-    }
+import PokemonListComponent from '../components/PokemonListComponent.vue';
+
+export default {
+  name: 'List',
+  components: { PokemonListComponent },
+};
 </script>
 
 <style scoped>

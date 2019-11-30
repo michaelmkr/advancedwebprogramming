@@ -1,30 +1,25 @@
-import Axios from "axios";
+import Axios from 'axios';
+
 const serverURL = 'https://lbartner-01.media.fhstp.ac.at:4430';
 
 const axios = {
 
-  getPokemon: function () {
+  getPokemon() {
     return Axios
-      .get(serverURL + '/pokemon/en')
-      .then(response => {
-        return response.data
-      })
+      .get(`${serverURL}/pokemon/en`)
+      .then(response => response.data);
   },
 
-  getPokemonDetails: function (PokemonID) {
+  getPokemonDetails(PokemonID) {
     return Axios
-      .get(serverURL + '/pokemon/en/' + PokemonID)
-      .then(response => {
-        return response.data
-      })
+      .get(`${serverURL}/pokemon/en/${PokemonID}`)
+      .then(response => response.data);
   },
 
-  getSightings: function (north, east, south, west) {
+  getSightings(north, east, south, west) {
     return Axios
-      .get(serverURL + '/sightings/map/' + north + ',' + east + ',' + south + ',' + west)
-      .then(response => {
-        return response.data
-      })
+      .get(`${serverURL}/sightings/map/${north},${east},${south},${west}`)
+      .then(response => response.data);
   },
 
 };

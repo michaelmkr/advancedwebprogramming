@@ -44,35 +44,37 @@
 </template>
 
 <script>
-    import {required, email, minLength, sameAs} from "vuelidate/lib/validators";
+import {
+  required, email, minLength, sameAs,
+} from 'vuelidate/lib/validators';
 
-    export default {
-        name: 'register',
-        data() {
-            return {
-                name: undefined,
-                email: undefined,
-                password: undefined,
-                passwordConfirm: undefined
-            }
-        },
-        validations: {
-            name: {required, minLength: minLength(3)},
-            email: {required, email},
-            password: {required, minLength: minLength(8)},
-            passwordConfirm: {required, sameAsPassword: sameAs('password')}
-        },
-        methods: {
-            submit(event) {
-                this.$v.$touch();
-                if (this.$v.$invalid) return;
-                // this.userRegister({
-                //     name: this.name,
-                //     email: this.email,
-                //     password: this.password,
-                //     passwordConfirm: this.passwordConfirm
-                // })
-            }
-        }
-    }
+export default {
+  name: 'register',
+  data() {
+    return {
+      name: undefined,
+      email: undefined,
+      password: undefined,
+      passwordConfirm: undefined,
+    };
+  },
+  validations: {
+    name: { required, minLength: minLength(3) },
+    email: { required, email },
+    password: { required, minLength: minLength(8) },
+    passwordConfirm: { required, sameAsPassword: sameAs('password') },
+  },
+  methods: {
+    submit(event) {
+      this.$v.$touch();
+      if (this.$v.$invalid) return;
+      // this.userRegister({
+      //     name: this.name,
+      //     email: this.email,
+      //     password: this.password,
+      //     passwordConfirm: this.passwordConfirm
+      // })
+    },
+  },
+};
 </script>
