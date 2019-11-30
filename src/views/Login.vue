@@ -35,15 +35,18 @@
     <!-- Textfield with Floating Label -->
 <form action="#">
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input class="mdl-textfield__input" type="text" id="sample3">
+    <input class="mdl-textfield__input" type="text" id="sample3" v-model="email" v-model.trim="email">
     <label class="mdl-textfield__label" for="sample3">Name / E-Mail</label>
+    <span v-if="!$v.email.required">Email is required.</span>
+    <span v-else-if="!$v.email.email">Not a valid email.</span>
   </div>
   </form>
 
   <form action="#">
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input class="mdl-textfield__input" type="text" id="sample3">
+    <input class="mdl-textfield__input" type="text" id="sample3" v-model="password" v-model.trim="password">
     <label class="mdl-textfield__label" for="sample3">Passwort</label>
+    <span v-if="!$v.password.required">Password is required.</span>
   </div>
 
 </form>
@@ -65,11 +68,31 @@
 
 
 <script>
-import Login from "../components/Login";
-    export default {
-        name: "Login.vue",
-        components: {Login}
+  import {email, required} from 'vuelidate/lib/validators';
+
+  export default {
+    name: 'login',
+    data() {
+      return {
+        email: undefined,
+        password: undefined
+      }
+    },
+    validations: {
+      email: {email, required},
+      password: {required}
+    },
+    methods: {
+      submit(event) {
+        this.$v.$touch();
+        // if (this.$v.$invalid)
+        // this.userLogin({ //import function
+        //     password: this.password,
+        //     email: this.email
+        // })
+      }
     }
+  }
 </script>
 
 <style scoped>

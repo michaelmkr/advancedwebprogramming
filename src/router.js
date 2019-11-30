@@ -50,21 +50,6 @@ export default new Router({
       component: () => import('./views/Mapview.vue'),
     },
     {
-      path: '/ButtonView',
-      name: 'buttonview',
-      component: () => import('./views/ButtonView.vue'),
-    },
-    {
-      path: '/ListView',
-      name: 'listview',
-      component: () => import('./views/ListView.vue'),
-    },
-    {
-      path: '/list-example',
-      name: 'list-example',
-      component: () => import('./views/ListExample.vue'),
-    },
-    {
       path: '/pokemon-list',
       name: 'pokemon-list',
       component: () => import('./views/PokemonList.vue'),
