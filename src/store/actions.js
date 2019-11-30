@@ -17,3 +17,13 @@ export const setBounds = ({ commit }, payload) => {
     setPokeList({ commit }, bounds);
   }
 };
+
+
+export const getSightings = ({commit}, payload) => {
+  http.getPokemonList(payload)
+    .then(response => response.data)
+    .then((data) => {
+      this.pokemonSightings = data;
+    });
+};
+
