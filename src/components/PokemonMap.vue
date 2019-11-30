@@ -130,13 +130,17 @@ export default {
                     };
                 });
             }, */
-    ...mapActions(['geolocate']),
+    ...mapActions([
+      'geolocate',
+      'getSigthings',
+      ]),
 
-    getSightings() {
+
+   /* getSightings() {
       axios.getSightings(this.bounds.north, this.bounds.east, this.bounds.south, this.bounds.west)
         .then((data) => {
           this.pokemonSightings = data;
-        });
+        });*/
     },
     logSomething() {
       console.log(this.pokemonSightings);
