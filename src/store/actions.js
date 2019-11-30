@@ -5,21 +5,7 @@ import store from '.';
 import {router} from '../router';
 
 
-export const setBounds = ({commit}, payload) => {
-  const bounds = {
-    north: payload.north,
-    east: payload.b.f,
-    south: payload.f.b,
-    west: payload.b.b,
-  };
-  if (bounds.north !== bounds.south && bounds.east !== bounds.west) {
-    commit(types.BOUNDS, bounds);
-    setPokeList({commit}, bounds);
-  }
-};
-
-
-export const getSightings = ({commit}, payload) => {
+export const getSightings = ({ commit }, payload) => {
   http.getPokemonList(payload)
     .then(response => {
         let list = [];
