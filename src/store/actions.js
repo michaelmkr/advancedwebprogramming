@@ -2,10 +2,10 @@ import axios from 'axios';
 import * as types from './mutations-types';
 import * as http from '../APICom/index';
 import store from '.';
-import { router } from '../router';
+import {router} from '../router';
 
 
-export const setBounds = ({ commit }, payload) => {
+export const setBounds = ({commit}, payload) => {
   const bounds = {
     north: payload.north,
     east: payload.b.f,
@@ -14,16 +14,20 @@ export const setBounds = ({ commit }, payload) => {
   };
   if (bounds.north !== bounds.south && bounds.east !== bounds.west) {
     commit(types.BOUNDS, bounds);
-    setPokeList({ commit }, bounds);
+    setPokeList({commit}, bounds);
   }
 };
 
 
 export const getSightings = ({commit}, payload) => {
   http.getPokemonList(payload)
-    .then(response => response.data)
-    .then((data) => {
-      this.pokemonSightings = data;
-    });
+    .then(response => {
+        let list = [];
+        response.data.forEach(item => {
+          list.push(item)
+        });
+        commit(types.POKELIST, list)
+      }
+    );
 };
 
