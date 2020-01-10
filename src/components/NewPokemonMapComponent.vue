@@ -32,7 +32,6 @@
 <script>
   import debounce from 'lodash.debounce'
   import {mapActions, mapGetters} from "vuex";
-  import {getSightings, setBounds, setPosition} from "../store/actions";
 
   export default {
     name: "NewPokemonMapComponent",
@@ -121,7 +120,7 @@
           lng: cent.lng()
         };
         console.log(newCenter);
-        return setPosition(newCenter);
+        return this.setPosition(newCenter);
       }, 500),
 
 
