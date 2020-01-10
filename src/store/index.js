@@ -27,7 +27,6 @@ const state = {
   pokeDistanceList: [],
 };
 
-
 export default new Vuex.Store({
   state,
   mutations,

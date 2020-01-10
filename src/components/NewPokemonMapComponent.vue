@@ -106,12 +106,12 @@
         console.log(this.position);
         console.log("MAP");
         console.log(this.asdf);
-        getSightings(this.asdf);
+        this.getSightings(this.asdf);
       },
       setBoundsD: debounce(function (bounds) {
         console.log("MAP setBoundsD");
         console.log(bounds);
-        return setBounds(bounds);
+        return this.setBounds(bounds);
       }, 500),
       setCenterD: debounce(function (cent) {
         console.log("MAP setCenterD");
