@@ -26,8 +26,7 @@ export default new Router({
     {
       path: '/map',
       name: 'map',
-      //component: () => import('./views/Map.vue'),
-       component: Map,
+      component: Map,
     },
     {
       path: '/register',
