@@ -26,14 +26,16 @@
            <router-link class="mdl-navigation__link" to="/login">Anmelden</router-link>
         </nav>
     </div>
-    </div>
+
     <main class="mdl-layout__content">
-      <router-view/>
+       <router-view class="main-content"/>
     </main>
+     </div>
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -41,7 +43,7 @@
     text-align: center;
     color: #2c3e50;
   }
-main {margin-top: 50px;}
+
 
 div.mdl-layout__drawer-button {
     display: none;
@@ -52,5 +54,11 @@ div.mdl-layout__drawer-button {
       display: block;
     }
   }
+
+.mdl-layout__content{
+  padding:1rem;
+
+}
+
 
 </style>
