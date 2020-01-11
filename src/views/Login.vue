@@ -113,9 +113,12 @@ export default {
 
 <style scoped>
 .demo-card-wide.mdl-card {
-margin:100px;
-  width:600px;
-  display:inline-block;
+min-width: 200px;
+max-width: 400px;
+width: auto;
+margin-left:auto;
+margin-right:auto;
+
 
 }
 .demo-card-wide > .mdl-card__title {
@@ -130,7 +133,7 @@ margin:100px;
 
 .mdl-card__title-text{
   font-weight: bold;
-  text-align: center;
+
 }
 
 
@@ -138,5 +141,9 @@ margin:100px;
   height: 60px;
 
 }
+.h2 {
+  display: center;
+}
+
 
 </style>
