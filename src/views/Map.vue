@@ -6,11 +6,14 @@
 </template>
 
 <script>
-import PokemonMapComponent from '../components/PokemonMap';
-import NewPokemonMapComponent from "../components/NewPokemonMapComponent";
+// import PokemonMapComponent from '../components/PokemonMap.vue';
+import NewPokemonMapComponent from '../components/NewPokemonMapComponent.vue';
 
 export default {
   name: 'Map',
-  components: {NewPokemonMapComponent, PokemonMapComponent },
+  components: {
+    NewPokemonMapComponent,
+    // PokemonMapComponent
+  },
 };
 </script>
