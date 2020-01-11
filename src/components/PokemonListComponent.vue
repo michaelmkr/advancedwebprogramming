@@ -30,8 +30,8 @@
 </template>
 
 <script>
-import axios from '../js/AxiosRequests';
 import { mapActions } from 'vuex';
+import axios from '../js/AxiosRequests';
 
 export default {
   name: 'PokemonListComponent',
@@ -51,7 +51,7 @@ export default {
     ...mapActions([
       'getDetails',
     ]),
-/*
+    /*
     getDetails(PokemonID) {
       // TODO @Hochi bitte irgendwie mit der Funktion axios.getPokemonDetail(PokemonID) lösen
       // Beispiel Code um getPokemonDetails zu verwenden
@@ -61,7 +61,7 @@ export default {
         .then((data) => {
           console.log(data);
         });
-    },*/
+    }, */
   },
   mounted() {
     axios.getPokemon()

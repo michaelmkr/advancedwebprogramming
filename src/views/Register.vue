@@ -61,36 +61,36 @@ export default {
   },
   // TODO change error message in computed()
   computed: {
-    errorEmail(){
+    errorEmail() {
       let error;
-      if(!this.$v.$error){
+      if (!this.$v.$error) {
         error = '';
-      } else if (this.$v.email.required === false){
-        error = 'E-Mail is required!'
-      }
-      else if (this.$v.email.email === false){
-        error = 'E-Mail is not a valid E-Mail!'
+      } else if (this.$v.email.required === false) {
+        error = 'E-Mail is required!';
+      } else if (this.$v.email.email === false) {
+        error = 'E-Mail is not a valid E-Mail!';
       }
       return error;
     },
-    errorPassword(){
+    errorPassword() {
       let error;
-      if(!this.$v.$error){
+      if (!this.$v.$error) {
         error = '';
-      } else if (this.$v.password.required === false){
-        error = 'Password is required!'
-      }
-      else if (this.$v.password.minLength === false){
-        error = 'Password must contain at least 8 !'
+      } else if (this.$v.password.required === false) {
+        error = 'Password is required!';
+      } else if (this.$v.password.minLength === false) {
+        error = 'Password must contain at least 8 !';
       }
       return error;
     },
-    errorPassword2(){}
+    errorPassword2() {
+      return undefined;
+    },
   },
   methods: {
-    submit(event) {
+    submit() {
       this.$v.$touch();
-      if (this.$v.$invalid) return;
+      // if (this.$v.$invalid) return
       // this.userRegister({
       //     name: this.name,
       //     email: this.email,

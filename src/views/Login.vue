@@ -33,7 +33,13 @@
     <!-- Textfield with Floating Label -->
 <form action="#">
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input class="mdl-textfield__input" type="text" id="sample3" v-model="email" v-model.trim="email">
+    <input
+      class="mdl-textfield__input"
+      type="text"
+      id="sample3"
+      v-model="email"
+      v-model.trim="email"
+    >
     <label class="mdl-textfield__label" for="sample3">Name / E-Mail</label>
     <span v-if="!$v.email.required">Email is required.</span>
     <span v-else-if="!$v.email.email">Not a valid email.</span>
@@ -42,7 +48,13 @@
 
   <form action="#">
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input class="mdl-textfield__input" type="password" id="sample3" v-model="password" v-model.trim="password">
+    <input
+      class="mdl-textfield__input"
+      type="password"
+      id="sample3"
+      v-model="password"
+      v-model.trim="password"
+    >
     <label class="mdl-textfield__label" for="sample3">Passwort</label>
     <span v-if="!$v.password.required">Password is required.</span>
   </div>
@@ -52,7 +64,10 @@
 
   </div>
   <div class="mdl-card__actions mdl-card--border">
-    <router-link class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" to="/">Anmelden
+    <router-link
+      class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+      to="/"
+    >Anmelden
     </router-link>
   </div>
   <!-- Share Button right corner
@@ -81,7 +96,7 @@ export default {
     password: { required },
   },
   methods: {
-    submit(event) {
+    submit() {
       this.$v.$touch();
       // if (this.$v.$invalid)
       // this.userLogin({ //import function
