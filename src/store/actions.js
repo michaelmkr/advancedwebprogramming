@@ -18,11 +18,10 @@ export const getSightings = ({ commit }, payload) => {
 
 export const addSighting = ({commit}, payload) => {
   console.log(payload);
+  http.postSighting(payload);
 };
 
 export const setPosition = ({ commit }, payload) => {
-  console.log("ACTION SET POSITION");
-  console.log(payload);
   commit(types.POSITION, payload);
 };
 
@@ -39,7 +38,6 @@ export const setBounds = ({ commit }, payload) => {
   // console.log(bounds);
   if (bounds.north !== bounds.south && bounds.east !== bounds.west) {
     commit(types.BOUNDS, bounds);
-    // TODO get Sightings for new Bounds
-    // setPokeList({commit}, bounds)
+    getSightings({commit}, bounds)
   }
 };

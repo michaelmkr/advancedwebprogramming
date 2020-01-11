@@ -19,7 +19,7 @@ const state = {
   },
   pokeDex: [],
   pokeList: [],
-  authToken: undefined,
+  authToken: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwiaWF0IjoxNTc1OTA5ODM4LCJ1c2VySWQiOjEsIm5hbWUiOiJKb2huIERvZSJ9._DaKNGfJVqU6wob_IWyVSH7eLZO2NSyThSDxzmqnRTk',
   snackBar: {
     timestamp: undefined,
     message: undefined,
