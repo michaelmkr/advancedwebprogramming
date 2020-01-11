@@ -28,13 +28,16 @@ export const setBounds = ({ commit }, payload) => {
     north: payload.pa.h,
     east: payload.ka.h,
     south: payload.pa.g,
-    west: payload.ka.g,
+    west: payload.ka.g
   };
   // console.log("ACTIONS: setBounds");
   // console.log(bounds);
   if (bounds.north !== bounds.south && bounds.east !== bounds.west) {
     commit(types.BOUNDS, bounds);
-    // TODO get Sightings for new Bounds
+    //TODO get Sightings for new Bounds
     // setPokeList({commit}, bounds)
   }
+};
+export const postSightings = ({commit}, payload) => {
+  // des is wurscht
 };
