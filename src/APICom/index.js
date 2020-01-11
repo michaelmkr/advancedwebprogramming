@@ -54,8 +54,6 @@ export function patchSightingByID({ sightingID, payload }) {
 export function getPokemonList({
   north, east, south, west,
 }) {
-  console.log('HTTP - coordinates passed:');
-  console.log(`${north} ${east} ${south} ${west}`);
   return apiCom.get(`/sightings/map/${[north, east, south, west].join(',')}`);
 }
 

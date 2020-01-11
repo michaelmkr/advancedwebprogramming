@@ -26,16 +26,12 @@ export const setPosition = ({ commit }, payload) => {
 };
 
 export const setBounds = ({ commit }, payload) => {
-  // console.log("Received in the action:");
-  // console.log(payload);
   const bounds = {
     north: payload.pa.h,
     east: payload.ka.h,
     south: payload.pa.g,
     west: payload.ka.g,
   };
-  // console.log("ACTIONS: setBounds");
-  // console.log(bounds);
   if (bounds.north !== bounds.south && bounds.east !== bounds.west) {
     commit(types.BOUNDS, bounds);
     getSightings({commit}, bounds)

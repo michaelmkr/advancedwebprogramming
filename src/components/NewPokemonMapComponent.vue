@@ -115,18 +115,14 @@
       },
       // eslint-disable-next-line
       setBoundsD: debounce(function (bounds) {
-        // console.log("MAP setBoundsD");
-        // console.log(bounds);
         return this.setBounds(bounds);
       }, 500),
-      // eslint-disable-next-line
+      // eslint-disable-next-linex
       setCenterD: debounce(function (cent) {
-        // console.log("MAP setCenterD");
         const newCenter = {
           lat: cent.lat(),
           lng: cent.lng(),
         };
-        // console.log(newCenter);
         return this.setPosition(newCenter);
       }, 500),
       addSightingFromMap() {
