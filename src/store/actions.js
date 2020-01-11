@@ -2,22 +2,17 @@ import * as types from './mutations-types';
 import * as http from '../APICom/index';
 
 export const getSightings = ({ commit }, payload) => {
-  console.log('ACTIONS getSightings -  payload:');
-  console.log(payload);
   http.getPokemonList(payload)
     .then((response) => {
       const list = [];
       response.data.forEach((item) => {
         list.push(item);
       });
-      console.log('RETRIEVED LIST in the action');
-      console.log(list);
       commit(types.POKELIST, list);
     });
 };
 
 export const addSighting = ({commit}, payload) => {
-  console.log(payload);
   http.postSighting(payload);
 };
 
