@@ -12,8 +12,8 @@ const state = {
     lng: 0,
   },
   bounds: {
-    east: 0,
     north: 0,
+    east: 0,
     south: 0,
     west: 0,
   },

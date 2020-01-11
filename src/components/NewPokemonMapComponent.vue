@@ -8,9 +8,16 @@
               ref="mapRef"
     >
       <gmap-marker
+        :icon="{
+          url: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + + m['pokedex-id'] + '.png',
+          anchor: {
+            x: 48,
+            y: 48
+          }
+        }"
         :key="index"
         :position="m.position"
-        v-for="(m, index) in mapMarkers"></gmap-marker>
+        v-for="(m, index) in getPokeList"></gmap-marker>
     </gmap-map>
     <br> <br> <br>
 
@@ -20,11 +27,11 @@
       <i class="material-icons"> my_location</i>
       Pan to Marker
     </button>
-<!--    <button @click="getPokeList"-->
-<!--            class="mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-button&#45;&#45;colored">-->
-<!--      <i class="material-icons"> my_location</i>-->
-<!--      GET LIST FROM STORE-->
-<!--    </button>-->
+    <!--    <button @click="getPokeList"-->
+    <!--            class="mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-button&#45;&#45;colored">-->
+    <!--      <i class="material-icons"> my_location</i>-->
+    <!--      GET LIST FROM STORE-->
+    <!--    </button>-->
 
   </div>
 </template>
@@ -32,14 +39,15 @@
 <script>
   import debounce from 'lodash.debounce'
   import {mapActions, mapGetters} from "vuex";
+  import {getPokeList} from "../store/getters";
+  import {setBounds} from "../store/actions";
 
   export default {
     name: "NewPokemonMapComponent",
     data() {
       return {
-        asdf: {north: 7.51945, east: 14.55087, south: 14.55087, west: 14.54927},
         // center: {lat: 48.2139035, lng: 15.6297068}, // = FH
-        center: {lat: 48.2139035, lng: 15.6297068},
+        center: {lat: 0, lng: 0},
         mapMarkers: [ // manually set to FH and Bhk
           {position: {lat: 48.2139035, lng: 15.6297068}},
           {position: {lat: 48.2438446, lng: 15.7998171}},
@@ -57,26 +65,6 @@
           south: 48.212105,
           west: 15.627389,
         },
-        sightings: [
-          {
-            'sighting-id': 1,
-            timestamp: 1533569023147,
-            'pokedex-id': 25,
-            position: {
-              lat: 48.213185,
-              lng: 15.631745,
-            },
-          },
-          {
-            'sighting-id': 2,
-            timestamp: 1533569123147,
-            'pokedex-id': 26,
-            position: {
-              lat: 48.212635,
-              lng: 15.635971,
-            },
-          },
-        ],
         pokemon: [
           {
             name: 'Pikachu',
@@ -89,37 +77,53 @@
         ],
       };
     },
+    mounted() {
+      // this.geolocate();
+      // getPokeList();
+      // this.getSightings();
+    },
     computed: {
       ...mapGetters([
         'getPokeList',
         'getPosition',
         'getPokeDex',
+        'getBounds',
       ])
     },
     methods: {
+      geolocate: function () { //TODO watch -> bei Standortveränderung updaten
+        navigator.geolocation.getCurrentPosition(position => {
+          this.center = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+        });
+    },
       ...mapActions([
         'getSightings',
         'setPosition',
         'setBounds',
       ]),
+
       doSomething() {
-        console.log(this.position);
-        console.log("MAP");
-        console.log(this.asdf);
-        this.getSightings(this.asdf);
+        console.log("MAP doSomething - bounds:");
+        console.log(this.bounds);
+        this.getSightings(this.bounds);
       },
+
       setBoundsD: debounce(function (bounds) {
-        console.log("MAP setBoundsD");
-        console.log(bounds);
+        // console.log("MAP setBoundsD");
+        // console.log(bounds);
         return this.setBounds(bounds);
       }, 500),
+
       setCenterD: debounce(function (cent) {
-        console.log("MAP setCenterD");
+        // console.log("MAP setCenterD");
         let newCenter = {
           lat: cent.lat(),
           lng: cent.lng()
         };
-        console.log(newCenter);
+        // console.log(newCenter);
         return this.setPosition(newCenter);
       }, 500),
 
