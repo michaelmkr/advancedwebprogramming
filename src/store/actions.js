@@ -16,9 +16,14 @@ export const getSightings = ({ commit }, payload) => {
     });
 };
 
+export const addSighting = ({commit}, payload) => {
+  console.log(payload);
+};
+
 export const setPosition = ({ commit }, payload) => {
-  // console.log("ACTION SET POSITION");
-  // console.log(payload);
+  console.log("ACTION SET POSITION");
+  console.log(payload);
+  commit(types.POSITION, payload);
 };
 
 export const setBounds = ({ commit }, payload) => {

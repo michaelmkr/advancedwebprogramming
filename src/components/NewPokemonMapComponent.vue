@@ -19,6 +19,12 @@
         :position="m.position"
         v-for="(m, index) in getPokeList"></gmap-marker>
     </gmap-map>
+
+    <button @click="addSightingFromMap"
+    class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+      <i class="material-icons">add</i>
+    </button>
+
     <br> <br> <br>
 
     <!-- Colored raised button -->
@@ -43,7 +49,7 @@
 import debounce from 'lodash.debounce';
 import { mapActions, mapGetters } from 'vuex';
 import { getPokeList } from '../store/getters';
-import { setBounds } from '../store/actions';
+import {addSighting, setBounds} from '../store/actions';
 
 export default {
   name: 'NewPokemonMapComponent',
@@ -58,10 +64,6 @@ export default {
       places: [],
       pokemonSightings: null,
       currentPlace: null,
-      position: {
-        lat: 48.2138999,
-        lng: 15.6297068,
-      },
       bounds: {
         north: 48.216888,
         east: 15.637702,
@@ -81,7 +83,7 @@ export default {
     };
   },
   mounted() {
-    // this.geolocate();
+    this.geolocate();
     // getPokeList();
     // this.getSightings();
   },
@@ -106,6 +108,7 @@ export default {
       'getSightings',
       'setPosition',
       'setBounds',
+      'addSighting',
     ]),
 
     doSomething() {
@@ -129,6 +132,16 @@ export default {
         // console.log(newCenter);
       return this.setPosition(newCenter);
     }, 500),
+    addSightingFromMap(){
+      let sighting = {
+        "pokedex-id": 25,
+        "position": {
+          "lat": this.getPosition.lat,
+          "lng": this.getPosition.lng,
+        }
+      };
+      this.addSighting(sighting);
+    }
 
 
   },
