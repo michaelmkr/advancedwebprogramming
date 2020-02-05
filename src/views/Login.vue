@@ -73,7 +73,7 @@
       ]),
       submit() {
         this.$v.$touch();
-        if (this.$v.$invalid)
+        if (!this.$v.$invalid)
           return this.submitLogin({email: this.email, password: this.password})
       }
     },
