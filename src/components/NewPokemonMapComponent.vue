@@ -380,13 +380,6 @@
     },
     methods: {
       geolocate() { // TODO watch -> bei Standortveränderung updaten
-        navigator.geolocation.getCurrentPosition((position) => {
-          this.center = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-        });
-
         navigator.geolocation.watchPosition(position => {
           let currentPosition = {
             lat: position.coords.latitude,
