@@ -1,7 +1,7 @@
 import * as types from './mutations-types';
 import * as http from '../APICom/index';
 
-export const getSightings = ({commit}, payload) => {
+export const getSightings = ({ commit }, payload) => {
   http.getPokemonList(payload)
     .then((response) => {
       const list = [];
@@ -16,12 +16,11 @@ export const addSighting = ({commit}, payload) => {
   http.postSighting(payload);
 };
 
-export const setPosition = ({commit}, payload) => {
-  console.log(payload);
+export const setPosition = ({ commit }, payload) => {
   commit(types.POSITION, payload);
 };
 
-export const setBounds = ({commit}, payload) => {
+export const setBounds = ({ commit }, payload) => {
   const bounds = {
     north: payload['north'],
     east: payload['east'],
