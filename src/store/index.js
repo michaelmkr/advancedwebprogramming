@@ -25,6 +25,7 @@ const state = {
     message: undefined,
   },
   pokeDistanceList: [],
+  email: '',
 };
 
 export default new Vuex.Store({

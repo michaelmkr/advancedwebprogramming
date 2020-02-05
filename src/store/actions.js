@@ -1,7 +1,9 @@
 import * as types from './mutations-types';
 import * as http from '../APICom/index';
+import {AUTH_TOKEN, EMAIL} from "./mutations-types";
+import router from "../router";
 
-export const getSightings = ({ commit }, payload) => {
+export const getSightings = ({commit}, payload) => {
   http.getPokemonList(payload)
     .then((response) => {
       const list = [];
@@ -16,11 +18,11 @@ export const addSighting = ({commit}, payload) => {
   http.postSighting(payload);
 };
 
-export const setPosition = ({ commit }, payload) => {
+export const setPosition = ({commit}, payload) => {
   commit(types.POSITION, payload);
 };
 
-export const setBounds = ({ commit }, payload) => {
+export const setBounds = ({commit}, payload) => {
   const bounds = {
     north: payload['north'],
     east: payload['east'],
@@ -39,9 +41,9 @@ export const submitRegister = ({commit}, payload) => {
       console.log('registered successfully!');
       console.log("response data auth token: " + response.data['auth-token']);
       localStorage.setItem('x-auth', response.data['auth-token']);
-      commit(types.AUTHTOKEN, JSON.stringify(response.data['auth-token']));
+      commit(types.AUTHTOKEN, response.data['auth-token']);
       localStorage.setItem('email', payload.email);
-      commit(types.EMAIL, JSON.stringify(payload.email))
+      commit(types.EMAIL, payload.email)
     })
     .catch(error => {
       console.log(error, error.response)
@@ -54,9 +56,10 @@ export const submitLogin = ({commit}, payload) => {
       console.log('logged in successfully!');
       console.log("response data auth token: " + response.data['auth-token']);
       localStorage.setItem('x-auth', response.data['auth-token']);
-      commit(types.AUTHTOKEN, JSON.stringify(response.data['auth-token']));
+      commit(types.AUTH_TOKEN, response.data['auth-token'].toString());
       localStorage.setItem('email', payload.email);
-      commit(types.EMAIL, JSON.stringify(payload.email))
+      commit(types.EMAIL, payload.email.toString());
+      router.push('/map')
     })
     .catch(error => {
       console.log(error, error.response)

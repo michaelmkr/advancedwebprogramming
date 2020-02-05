@@ -22,4 +22,7 @@ export default {
   [types.POKEDISTANCELIST](state, payload) {
     state.pokeDistanceList = payload;
   },
+  [types.EMAIL] (state, payload) {
+    state.email = payload
+  },
 };
