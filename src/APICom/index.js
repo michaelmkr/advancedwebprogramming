@@ -36,10 +36,10 @@ export function getPokemonDetails({ language, pokedexId }) {
 }
 
 export function postSighting({ id, lat, lng }) {
-  console.log(getAuthToken);
+  console.log(getAuthToken)
   return apiCom.post('/sightings', {
     "pokedex-id": id,
-    position: { lat: lat, lng: lng },
+    "position": { "lat": lat, "lng": lng },
   }, //{headers: {'X-Auth-Header': this.$store.state.authToken}}
   );
 }
