@@ -1,32 +1,37 @@
 <template>
-  <div>
-
-    <h1>Suggestion Component</h1>
-    <vue-suggestion :itemTemplate="itemTemplate"
-                    :items="items"
-                    :setLabel="setLabel"
-                    @changed="inputChange"
-                    @selected="itemSelected"
-                    v-model="item">
-    </vue-suggestion>
-    <button @click="showItems">show items</button>
+  <div class="mdl-grid">
+    <div class="mdl-card mdl-shadow--16dp util-center util-spacing-h--40px">
+      <div class="mdl-card__title mdl-color--amber-700">
+        <h2 class="mdl-card__title-text mdl-color-text--white">Sichtung hinzufügen:</h2>
+      </div>
+      <div class="mdl-card__supporting-text mdl-grid" style="height: 100px;">
+        <vue-suggestion :itemTemplate="itemTemplate"
+                        :items="suggestedItems"
+                        :setLabel="setLabel"
+                        @changed="inputChange"
+                        @selected="itemSelected"
+                        v-model="item">
+        </vue-suggestion>
+        <button @click="addSightingFromMap"
+                class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+          <i class="material-icons">add</i>
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
   import itemTemplate from './ItemTemplate';
   import * as http from '../APICom/index';
+  import {mapActions, mapGetters} from "vuex";
 
   export default {
     name: 'SuggestionComponent',
     data() {
       return {
         item: {},
-        items: [
-          {id: 1, name: 'Golden Retriever'},
-          {id: 2, name: 'Cat'},
-          {id: 3, name: 'Squirrel'},
-        ],
+        items: [],
         suggestedItems: [],
         itemTemplate,
       }
@@ -34,9 +39,24 @@
     mounted() {
       this.getPokemon()
     },
+    computed: {
+      ...mapGetters([
+        'getPosition',
+        'getAuthToken'
+      ]),
+    },
     methods: {
-      showItems() {
-        console.log(this.items);
+      ...mapActions([
+        'addSighting',
+      ]),
+      addSightingFromMap() {
+        let sighting = {
+          "id": this.item['pokedex-id'],
+          "lat": this.getPosition.lat,
+          "lng": this.getPosition.lng,
+          "token": this.getAuthToken
+        };
+        this.addSighting(sighting);
       },
       getPokemon() {
         http.getAllPokemon({"language": "de"}).then((response) => {
@@ -47,14 +67,10 @@
         this.item = item;
       },
       setLabel(item) {
-        console.log("now selected");
-        return item.name;
+        return item['name'];
       },
       inputChange(text) {
-        // your search method
-        this.suggestedItems = this.items.filter(item => item.name.includes(text));
-        //this.items = this.items.filter(item => item.name.includes(text));
-        // now `items` will be showed in the suggestion list
+        this.suggestedItems = this.items.filter(item => item.name.toLowerCase().includes(text.toLowerCase()));
       },
     },
   };

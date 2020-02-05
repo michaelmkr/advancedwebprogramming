@@ -24,11 +24,6 @@
         v-for="(m, index) in getPokeList"></gmap-marker>
     </gmap-map>
 
-    <button @click="addSightingFromMap"
-            class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
-      <i class="material-icons">add</i>
-    </button>
-
     <br> <br> <br>
 
     <!-- Colored raised button -->
@@ -36,32 +31,8 @@
             class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
       doSomething
     </button>
-    <!--
-      <button @click="getPokeList"
-         class="mdl-button mdl-js-button mdl-button&#45;&#45;raised mdl-button&#45;&#45;colored"
-       >
-         <i class="material-icons"> my_location</i>
-         GET LIST FROM STORE
-       </button>
-   -->
 
-    <h1> Aktuelle Sichtungen</h1>
-
-    <!-- Sichtung Design -->
-
-
-    <div class="demo-card-square mdl-card mdl-shadow--2dp" v-for="m in getPokeList">
-      <div class="mdl-card__title mdl-card--expand">
-        <h2 class="mdl-card__title-text">{{m['pokedex-id']}}</h2>
-      </div>
-      <div class="mdl-card__actions mdl-card--border">
-        <router-link class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
-                     to="/">Details
-        </router-link>
-      </div>
-    </div>
-
-
+<SuggestionComponent ref="test"></SuggestionComponent>
 
   </div>
 
@@ -402,7 +373,7 @@
       ]),
 
       doSomething() {
-        console.log(this.getPokeList);
+        console.log(this.$refs.test.$el.innerHTML);
       },
       // eslint-disable-next-line
       setBoundsD: debounce(function () {
