@@ -68,3 +68,9 @@ export const submitLogin = ({commit}, payload) => {
       console.log(error, error.response)
     })
 };
+
+export const retrievePokedex = ({commit}, payload) => {
+  http.getAllPokemon({"language": payload}).then((response) => {
+    commit(types.POKEDEX, response.data)
+  });
+};
