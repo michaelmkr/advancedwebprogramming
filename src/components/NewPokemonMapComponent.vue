@@ -61,17 +61,22 @@
       </div>
     </div>
 
+
+
   </div>
+
 </template>
 
 <script>
   import debounce from 'lodash.debounce';
   import {mapActions, mapGetters} from 'vuex';
+  import SuggestionComponent from "./SuggestionComponent";
   import {getAuthToken, getBounds, getPokeList} from '../store/getters';
   import {addSighting, getSightings, setBounds, setPosition} from '../store/actions';
 
   export default {
     name: 'NewPokemonMapComponent',
+    components: {SuggestionComponent},
     data() {
       return {
         options: {
