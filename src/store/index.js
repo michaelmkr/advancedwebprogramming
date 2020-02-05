@@ -19,7 +19,7 @@ const state = {
   },
   pokeDex: [],
   pokeList: [],
-  authToken: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzd2FzdGVkQHBvdGVudGlhbC5hd3AiLCJpYXQiOjE1ODA5MjUwNzYsInVzZXJJZCI6MTE1LCJuYW1lIjoiTWljaGFlbCJ9.E-jXYnRirz2hlJXy_km_RfKEMyIgt-JaNOHui_7lM_c',
+  authToken: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzd2FzdGVkQHBvdGVudGlhbC5hd3AiLCJpYXQiOjE1ODA5Mjc0NjIsInVzZXJJZCI6MTE1LCJuYW1lIjoiTWljaGFlbCJ9.5GFho-s-gfcYDFaMDiF-efyKaRyjadhbOC9bLwlDuwA',
   snackBar: {
     timestamp: undefined,
     message: undefined,

@@ -1,10 +1,11 @@
 <template>
   <div>
     <gmap-map :center="center"
-              :zoom="12"
+              :options="options"
+              :zoom="15"
               @bounds_changed="setBoundsD"
-              @center_changed="setCenterD"
               class="gmap-map"
+              draggable="false"
               ref="mapRef"
     >
       <gmap-marker
@@ -12,7 +13,7 @@
         :position="this.center"></gmap-marker>
       <gmap-marker
         :icon="{
-          url: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + m['pokedex-id'] + '.png',
+          url: 'https://raw.githubusercontent.com/michaelmkr/sprites/master/sprites/pokemon/' + m['pokedex-id'] + '.png',
           anchor: {
             x: 48,
             y: 48
@@ -73,6 +74,289 @@
     name: 'NewPokemonMapComponent',
     data() {
       return {
+        options: {
+          styles: [
+            {
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#ebe3cd"
+                }
+              ]
+            },
+            {
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#523735"
+                }
+              ]
+            },
+            {
+              "elementType": "labels.text.stroke",
+              "stylers": [
+                {
+                  "color": "#f5f1e6"
+                }
+              ]
+            },
+            {
+              "featureType": "administrative",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "featureType": "administrative",
+              "elementType": "geometry.stroke",
+              "stylers": [
+                {
+                  "color": "#c9b2a6"
+                }
+              ]
+            },
+            {
+              "featureType": "administrative.land_parcel",
+              "elementType": "geometry.stroke",
+              "stylers": [
+                {
+                  "color": "#dcd2be"
+                }
+              ]
+            },
+            {
+              "featureType": "administrative.land_parcel",
+              "elementType": "labels",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "featureType": "administrative.land_parcel",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#ae9e90"
+                }
+              ]
+            },
+            {
+              "featureType": "landscape.natural",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#dfd2ae"
+                }
+              ]
+            },
+            {
+              "featureType": "poi",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "featureType": "poi",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#dfd2ae"
+                }
+              ]
+            },
+            {
+              "featureType": "poi",
+              "elementType": "labels.text",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "featureType": "poi",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#93817c"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "geometry.fill",
+              "stylers": [
+                {
+                  "color": "#a5b076"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#447530"
+                }
+              ]
+            },
+            {
+              "featureType": "road",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#f5f1e6"
+                }
+              ]
+            },
+            {
+              "featureType": "road",
+              "elementType": "labels.icon",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "featureType": "road.arterial",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#fdfcf8"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#f8c967"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway",
+              "elementType": "geometry.stroke",
+              "stylers": [
+                {
+                  "color": "#e9bc62"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway.controlled_access",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#e98d58"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway.controlled_access",
+              "elementType": "geometry.stroke",
+              "stylers": [
+                {
+                  "color": "#db8555"
+                }
+              ]
+            },
+            {
+              "featureType": "road.local",
+              "elementType": "labels",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "featureType": "road.local",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#806b63"
+                }
+              ]
+            },
+            {
+              "featureType": "transit",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "featureType": "transit.line",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#dfd2ae"
+                }
+              ]
+            },
+            {
+              "featureType": "transit.line",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#8f7d77"
+                }
+              ]
+            },
+            {
+              "featureType": "transit.line",
+              "elementType": "labels.text.stroke",
+              "stylers": [
+                {
+                  "color": "#ebe3cd"
+                }
+              ]
+            },
+            {
+              "featureType": "transit.station",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#dfd2ae"
+                }
+              ]
+            },
+            {
+              "featureType": "water",
+              "elementType": "geometry.fill",
+              "stylers": [
+                {
+                  "color": "#b9d3c2"
+                }
+              ]
+            },
+            {
+              "featureType": "water",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#92998d"
+                }
+              ]
+            }
+          ],
+          mapTypeControl: false,
+          streetViewControl: false,
+          fullscreenControl: false,
+          zoomControl: false,
+          //draggable: false
+        },
         // center: {lat: 48.2139035, lng: 15.6297068}, // = FH
         center: {lat: 0, lng: 0},
         places: [],
@@ -102,6 +386,15 @@
             lng: position.coords.longitude,
           };
         });
+
+        navigator.geolocation.watchPosition(position => {
+          let currentPosition = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          this.center = currentPosition;
+          this.setPosition(currentPosition)
+        })
       },
       ...mapActions([
         'getSightings',
@@ -111,28 +404,41 @@
       ]),
 
       doSomething() {
-        this.getSightings(this.getBounds);
-        console.log(this.getAuthToken);
+        console.log(this.getPokeList);
       },
       // eslint-disable-next-line
-      setBoundsD: debounce(function (bounds) {
-        return this.setBounds(bounds);
+      setBoundsD: debounce(function () {
+        const bounds = this.$refs.mapRef.$mapObject.getBounds();
+        let bound = bounds.toJSON();
+        return this.setBounds(bound)
       }, 500),
       // eslint-disable-next-linex
-      setCenterD: debounce(function (cent) {
-        const newCenter = {
-          lat: cent.lat(),
-          lng: cent.lng(),
-        };
-        return this.setPosition(newCenter);
-      }, 500),
+      // setCenterD: debounce(function (cent) {
+      //   const newCenter = {
+      //     lat: cent.lat(),
+      //     lng: cent.lng(),
+      //   };
+      //   return this.setPosition(newCenter);
+      // }, 500),
       addSightingFromMap() {
-        let sighting = {
-          "id": 2,
-          "lat": this.getPosition.lat,
-          "lng": this.getPosition.lng,
-        };
-        this.addSighting(sighting);
+
+        var inputID = prompt("Please enter Pokemon ID:", "25");
+        if (inputID !== null && inputID !== "") {
+          if (isNaN(inputID)) {
+            alert("must be a number!")
+          } else {
+            let sighting = {
+              "id": inputID,
+              "lat": this.getPosition.lat,
+              "lng": this.getPosition.lng,
+              "token": this.getAuthToken
+            };
+            this.addSighting(sighting);
+
+          }
+        } else {
+          alert("cannot be null!")
+        }
       }
 
 

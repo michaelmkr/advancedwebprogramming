@@ -1,7 +1,7 @@
 import * as types from './mutations-types';
 import * as http from '../APICom/index';
-import {AUTH_TOKEN, EMAIL} from "./mutations-types";
 import router from "../router";
+import * as getters from './getters'
 
 export const getSightings = ({commit}, payload) => {
   http.getPokemonList(payload)
@@ -15,7 +15,10 @@ export const getSightings = ({commit}, payload) => {
 };
 
 export const addSighting = ({commit}, payload) => {
-  http.postSighting(payload);
+  http.postSighting(payload)
+    .then((response) => {
+      console.log(response.status);
+    });
 };
 
 export const setPosition = ({commit}, payload) => {
