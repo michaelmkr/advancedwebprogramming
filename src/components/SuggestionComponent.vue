@@ -14,10 +14,8 @@
 </template>
 
 <script>
-  import { VueSuggestion } from 'vue-suggestion';
   import itemTemplate from './ItemTemplate';
   import * as http from '../APICom/index';
-  import {getAllPokemon} from "../APICom/index";
   export default {
     name: 'SuggestionComponent',
     data () {
@@ -32,7 +30,7 @@
       }
     },
     mounted() {
-      this.getPokemon()
+      //this.getPokemon()
     },
     methods: {
       showItems(){
@@ -47,11 +45,12 @@
         this.item = item;
       },
       setLabel (item) {
+        console.log("now selected")
         return item.name;
       },
       inputChange (text) {
         // your search method
-        this.items = items.find(item => item.name.contains(text));
+        this.items = this.items.filter(item => item.name.contains(text));
         // now `items` will be showed in the suggestion list
       },
     },
