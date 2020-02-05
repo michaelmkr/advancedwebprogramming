@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {getAuthToken} from "../store/getters";
 
 //const baseURL = String('https://virtserver.swaggerhub.com/pgmon/ws18/1.0.0');
 const baseURL = String('https://lbartner-01.media.fhstp.ac.at:4430');
@@ -35,6 +36,7 @@ export function getPokemonDetails({ language, pokedexId }) {
 }
 
 export function postSighting({ id, lat, lng }) {
+  console.log(getAuthToken);
   return apiCom.post('/sightings', {
     "pokedex-id": id,
     position: { lat: lat, lng: lng },

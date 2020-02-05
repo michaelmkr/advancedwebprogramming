@@ -1,12 +1,15 @@
 <template>
   <div>
     <gmap-map :center="center"
-              :zoom="10"
+              :zoom="12"
               @bounds_changed="setBoundsD"
               @center_changed="setCenterD"
               class="gmap-map"
               ref="mapRef"
     >
+      <gmap-marker
+        :icon="{ url: require('../assets/ash.png')}"
+        :position="this.center"></gmap-marker>
       <gmap-marker
         :icon="{
           url: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + m['pokedex-id'] + '.png',
@@ -64,7 +67,7 @@
   import debounce from 'lodash.debounce';
   import {mapActions, mapGetters} from 'vuex';
   import {getAuthToken, getBounds, getPokeList} from '../store/getters';
-  import {addSighting, getSightings, setBounds} from '../store/actions';
+  import {addSighting, getSightings, setBounds, setPosition} from '../store/actions';
 
   export default {
     name: 'NewPokemonMapComponent',
@@ -109,6 +112,7 @@
 
       doSomething() {
         this.getSightings(this.getBounds);
+        console.log(this.getAuthToken);
       },
       // eslint-disable-next-line
       setBoundsD: debounce(function (bounds) {
