@@ -1,103 +1,163 @@
 <template>
-  <!-- Textfield with Floating Label -->
+  <div class="mdl-grid">
 
-  <form action="#">
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <input class="mdl-textfield__input" id="sample3" type="text" v-model="name"
-             v-model.trim="name">
-      <label class="mdl-textfield__label" for="sample3">Name...</label>
-      <span v-if="!$v.name.required">Name is required</span>
-      <span v-else-if="!$v.name.minLength">Must conatin at least 3 characters.</span>
-    </div>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <input class="mdl-textfield__input" id="sample3" type="text" v-model="email"
-             v-model.trim="email">
-      <label class="mdl-textfield__label" for="sample3">Email...</label>
-      <span v-if="!$v.email.required">Email is required.</span>
-      <span v-else-if="!$v.email.email">Not a valid email.</span>
-    </div>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <input class="mdl-textfield__input" id="sample3" type="password" v-model="password"
-             v-model.trim="password">
-      <label class="mdl-textfield__label" for="sample3">Passwort...</label>
-      <span v-if="!$v.password.required">Password is required.</span>
-      <span v-else-if="!$v.password.minLength">Must contain at least 8 characters.</span>
-    </div>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <input class="mdl-textfield__input" id="sample3" type="password" v-model="passwordConfirm"
-             v-model.trim="passwordConfirm">
-      <label class="mdl-textfield__label" for="sample3">Passwort wiederholen...</label>
-      <span v-if="!$v.passwordConfirm.required">Password is required.</span>
-      <span v-else-if="!$v.passwordConfirm.minLength">Must contain at least 8 characters.</span>
-      <span v-else-if="!$v.passwordConfirm.sameAsPassword">Must be the same as password.</span>
-    </div>
-  </form>
+    <div class="mdl-card mdl-shadow--16dp util-center util-spacing-h--40px">
+      <div class="mdl-card__title mdl-color--amber-700">
+        <h2 class="mdl-card__title-text mdl-color-text--white">Registrierung</h2>
+      </div>
+      <div class="mdl-card__supporting-text mdl-grid">
+        <form @submit.stop.prevent="submit">
+          <input-component :error="errorName"
+                           @input="$v.name.$touch()"
+                           label="Name"
+                           required
+                           type="text"
+                           v-model.trim="name"
+          />
+          <input-component :error="errorEmail"
+                           @input="$v.email.$touch()"
+                           label="E-Mail"
+                           required
+                           type="email"
+                           v-model.trim="email"
+          />
+          <input-component :error="errorPassword"
+                           @input="$v.password.$touch()"
+                           label="Passwort"
+                           required
+                           type="password"
+                           v-model.trim="password"
+          />
+          <input-component :error="errorPasswordRepeat"
+                           @input="$v.passwordRepeat.$touch()"
+                           label="Passwort wiederholen"
+                           required
+                           type="password"
+                           v-model.trim="passwordRepeat"
+          />
+          <br>
 
-  <!-- Textfield with Floating Label -->
+          <div align="center" class="mdl-cell mdl-cell--12-col send-button">
+            <component-button color="colored" type="raised" @click="submit">Abschicken</component-button>
+          </div>
 
-
+        </form>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import {
-  required, email, minLength, sameAs,
-} from 'vuelidate/lib/validators';
+  import {required, email, minLength, sameAs} from 'vuelidate/lib/validators'
+  import {mapActions} from 'vuex'
+  import ComponentButton from "../components/ButtonComponent";
+  import InputComponent from "../components/InputComponent";
 
-export default {
-  name: 'register',
-  data() {
-    return {
-      name: undefined,
-      email: undefined,
-      password: undefined,
-      passwordConfirm: undefined,
-    };
-  },
-  validations: {
-    name: { required, minLength: minLength(3) },
-    email: { required, email },
-    password: { required, minLength: minLength(8) },
-    passwordConfirm: { required, sameAsPassword: sameAs('password') },
-  },
-  // TODO change error message in computed()
-  computed: {
-    errorEmail() {
-      let error;
-      if (!this.$v.$error) {
-        error = '';
-      } else if (this.$v.email.required === false) {
-        error = 'E-Mail is required!';
-      } else if (this.$v.email.email === false) {
-        error = 'E-Mail is not a valid E-Mail!';
+  export default {
+    components: {InputComponent, ComponentButton},
+    data() {
+      return {
+        name: '',
+        email: '',
+        password: '',
+        passwordRepeat: ''
       }
-      return error;
     },
-    errorPassword() {
-      let error;
-      if (!this.$v.$error) {
-        error = '';
-      } else if (this.$v.password.required === false) {
-        error = 'Password is required!';
-      } else if (this.$v.password.minLength === false) {
-        error = 'Password must contain at least 8 !';
+    computed: {
+      errorName() {
+        let error;
+        if (!this.$v.$error) {
+          error = ''
+        } else if (this.$v.name.required === false) {
+          error = 'Name muss angegeben werden!'
+        } else if (this.$v.name.minLength === false) {
+          error = 'Ihr Name muss mindestens 3 Zeichen enthalten!'
+        }
+        return error
+      },
+      errorEmail() {
+        let error;
+        if (!this.$v.$error) {
+          error = ''
+        } else if (this.$v.email.required === false) {
+          error = 'E-Mail muss angegeben werden!'
+        } else if (this.$v.email.email === false) {
+          error = 'Keine korrekte E-Mail Adresse angegeben!'
+        }
+        return error
+      },
+      errorPassword() {
+        let error;
+        if (!this.$v.$error) {
+          error = ''
+        } else if (this.$v.password.required === false) {
+          error = 'Ein Passwort muss angegeben werden!'
+        }
+        return error
+      },
+      errorPasswordRepeat() {
+        let error;
+        if (!this.$v.$error) {
+          error = ''
+        } else if (this.$v.passwordRepeat.required === false) {
+          error = 'Passwort muss wiederholt werden!'
+        } else if (this.$v.passwordRepeat.sameAsPassword === false) {
+          error = 'Passwörter stimmen nicht überein!'
+        }
+        return error
       }
-      return error;
     },
-    errorPassword2() {
-      return undefined;
+    validations: {
+      name: {
+        required,
+        minLength: minLength(3)
+      },
+      email: {
+        required,
+        email
+      },
+      password: {
+        required,
+        minLength: minLength(8)
+      },
+      passwordRepeat: {
+        required,
+        sameAsPassword: sameAs('password')
+      }
     },
-  },
-  methods: {
-    submit() {
-      this.$v.$touch();
-      // if (this.$v.$invalid) return
-      // this.userRegister({
-      //     name: this.name,
-      //     email: this.email,
-      //     password: this.password,
-      //     passwordConfirm: this.passwordConfirm
-      // })
-    },
-  },
-};
+    methods: {
+      ...mapActions([
+        'submitRegister'
+      ]),
+      submit() {
+        this.$v.$touch();
+        if (this.$v.$invalid)
+          return this.submitRegister({name: this.name, email: this.email, password: this.password})
+      }
+
+    }
+  }
 </script>
+
+<style scoped>
+  .errorMessage {
+    color: red
+  }
+
+  .util-center {
+    margin: auto;
+  }
+
+  .util-max-512px {
+    max-width: 512px;
+  }
+
+  .util-spacing-h--40px {
+    margin-top: 40px;
+    margin-bottom: 40px
+  }
+
+  .util-no-decoration {
+    text-decoration: none;
+  }
+</style>

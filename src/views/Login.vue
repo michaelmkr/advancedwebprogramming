@@ -1,149 +1,108 @@
-<!-- Michis Log In
-
 <template>
-    <login></login>
+  <div class="demo">
+    <div>
 
+      <form @submit.stop.prevent="submit" id="formDemo">
+        <input-component :error="errorEmail"
+                         @input="$v.email.$touch()"
+                         label="E-Mail"
+                         required
+                         type="email"
+                         v-model.trim="email"/>
+        <input-component :error="errorPassword"
+                         @input="$v.password.$touch()"
+                         label="Passwort"
+                         required
+                         type="password"
+                         v-model="password"/>
+
+        <component-button @click="submit" color="colored" type="raised">Abschicken</component-button>
+      </form>
+
+
+    </div>
+  </div>
 </template>
 
 <script>
-    import Login from "../components/Login";
-    export default {
-        name: "Login.vue",
-        components: {Login}
-    }
-</script>
+  import {
+    required,
+    email
+  } from 'vuelidate/lib/validators'
 
-<style scoped>
-</style>
--->
+  import {
+    mapActions
+  } from 'vuex'
+  import InputComponent from "../components/InputComponent";
+  import ComponentButton from "../components/ButtonComponent";
 
-
-<!-- Julias Log In-->
-
-  <template>
-
-
-  <!-- Wide card with share menu button -->
-<div class="demo-card-wide mdl-card mdl-shadow--2dp">
-  <div class="mdl-card__title">
-    <h2 class="mdl-card__title-text">Anmelden</h2>
-  </div>
-
-  <div class="mdl-card__supporting-text">
-    <!-- Textfield with Floating Label -->
-<form action="#">
-  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input
-      class="mdl-textfield__input"
-      type="text"
-      id="sample3"
-      v-model="email"
-      v-model.trim="email"
-    >
-    <label class="mdl-textfield__label" for="sample3">Name / E-Mail</label>
-    <span v-if="!$v.email.required">Email is required.</span>
-    <span v-else-if="!$v.email.email">Not a valid email.</span>
-  </div>
-  </form>
-
-  <form action="#">
-  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input
-      class="mdl-textfield__input"
-      type="password"
-      id="sample3"
-      v-model="password"
-      v-model.trim="password"
-    >
-    <label class="mdl-textfield__label" for="sample3">Passwort</label>
-    <span v-if="!$v.password.required">Password is required.</span>
-  </div>
-
-</form>
-
-
-  </div>
-  <div class="mdl-card__actions mdl-card--border">
-    <router-link
-      class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
-      to="/"
-    >Anmelden
-    </router-link>
-  </div>
-  <!-- Share Button right corner
-    <div class="mdl-card__menu">
-    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-      <i class="material-icons">share</i>
-    </button>
-  </div>-->
-</div>
-</template>
-
-
-<script>
-import { email, required } from 'vuelidate/lib/validators';
-
-export default {
-  name: 'login',
-  data() {
-    return {
-      email: undefined,
-      password: undefined,
-    };
-  },
-  validations: {
-    email: { email, required },
-    password: { required },
-  },
-  methods: {
-    submit() {
-      this.$v.$touch();
-      // if (this.$v.$invalid)
-      // this.userLogin({ //import function
-      //     password: this.password,
-      //     email: this.email
-      // })
+  export default {
+    components: {ComponentButton, InputComponent},
+    data() {
+      return {
+        email: '',
+        password: ''
+      }
     },
-  },
-};
+    computed: {
+      errorEmail() {
+        let error;
+        if (!this.$v.$error) {
+          error = ''
+        } else if (this.$v.email.required === false) {
+          error = 'E-Mail muss angegeben werden!'
+        } else if (this.$v.email.email === false) {
+          error = 'E-Mail Adresse entspricht nicht dem richtigen Format.'
+        }
+        return error
+      },
+      errorPassword() {
+        let error;
+        if (!this.$v.$error) {
+          error = ''
+        } else if (this.$v.password.required === false) {
+          error = 'Passwort muss angegeben werden!'
+        }
+        return error
+      }
+    },
 
-// TODO change error message in computed()
+    methods: {
+      ...mapActions([
+        'submitLogin'
+      ]),
+      submit() {
+        this.$v.$touch();
+        if (this.$v.$invalid)
+          return this.submitLogin({email: this.email, password: this.password})
+      }
+    },
 
+    validations: {
+      email: {
+        required,
+        email
+      },
+      password: {
+        required
+      }
+    }
+
+  }
 </script>
 
 <style scoped>
-.demo-card-wide.mdl-card {
-min-width: 200px;
-max-width: 400px;
-width: auto;
-margin-left:auto;
-margin-right:auto;
+  .errorMessage {
+    color: red
+  }
 
+  .util-center {
+    margin: auto;
+  }
 
-}
-.demo-card-wide > .mdl-card__title {
-  color:white;
-  height: 176px;
-  background: url('../assets/Anmelden.jpg') center / cover;
-
-}
-.demo-card-wide > .mdl-card__menu {
-  color: #fff;
-}
-
-.mdl-card__title-text{
-  font-weight: bold;
-
-}
-
-
-.mdl-card__actions {
-  height: 60px;
-
-}
-.h2 {
-  display: center;
-}
-
+  .util-spacing-h--40px {
+    margin-top: 40px;
+    margin-bottom: 40px
+  }
 
 </style>

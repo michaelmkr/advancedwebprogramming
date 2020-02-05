@@ -9,7 +9,7 @@
     >
       <gmap-marker
         :icon="{
-          url: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + + m['pokedex-id'] + '.png',
+          url: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + m['pokedex-id'] + '.png',
           anchor: {
             x: 48,
             y: 48
@@ -41,13 +41,29 @@
        </button>
    -->
 
+    <h1> Aktuelle Sichtungen</h1>
+
+    <!-- Sichtung Design -->
+
+
+    <div class="demo-card-square mdl-card mdl-shadow--2dp" v-for="m in getPokeList">
+      <div class="mdl-card__title mdl-card--expand">
+        <h2 class="mdl-card__title-text">{{m['pokedex-id']}}</h2>
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <router-link class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                     to="/">Details
+        </router-link>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
   import debounce from 'lodash.debounce';
   import {mapActions, mapGetters} from 'vuex';
-  import {getPokeList} from '../store/getters';
+  import {getAuthToken, getBounds, getPokeList} from '../store/getters';
   import {addSighting, getSightings, setBounds} from '../store/actions';
 
   export default {
@@ -56,35 +72,15 @@
       return {
         // center: {lat: 48.2139035, lng: 15.6297068}, // = FH
         center: {lat: 0, lng: 0},
-        mapMarkers: [ // manually set to FH and Bhk
-          {position: {lat: 48.2139035, lng: 15.6297068}},
-          {position: {lat: 48.2438446, lng: 15.7998171}},
-        ],
         places: [],
         pokemonSightings: null,
         currentPlace: null,
-        bounds: {
-          north: 48.216888,
-          east: 15.637702,
-          south: 48.212105,
-          west: 15.627389,
-        },
-        pokemon: [
-          {
-            name: 'Pikachu',
-            'pokedex-id': 25,
-          },
-          {
-            name: 'Raichu',
-            'pokedex-id': 26,
-          },
-        ],
+        bounds: null,
       };
     },
     mounted() {
       this.geolocate();
-      // getPokeList();
-      // this.getSightings();
+      this.getSightings(this.getBounds)
     },
     computed: {
       ...mapGetters([
@@ -92,6 +88,7 @@
         'getPosition',
         'getPokeDex',
         'getBounds',
+        'getAuthToken'
       ]),
     },
     methods: {
@@ -127,7 +124,7 @@
       }, 500),
       addSightingFromMap() {
         let sighting = {
-          "id": 13,
+          "id": 2,
           "lat": this.getPosition.lat,
           "lng": this.getPosition.lng,
         };
