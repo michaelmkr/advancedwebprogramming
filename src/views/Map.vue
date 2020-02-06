@@ -1,8 +1,6 @@
 <template>
   <div>
     <new-pokemon-map-component></new-pokemon-map-component>
-    <pokemon-list></pokemon-list>
-<!--    <pokemon-map-component></pokemon-map-component>-->
   </div>
 </template>
 

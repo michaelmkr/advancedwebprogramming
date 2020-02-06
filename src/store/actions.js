@@ -44,9 +44,11 @@ export const submitRegister = ({commit}, payload) => {
       console.log('registered successfully!');
       console.log("response data auth token: " + response.data['auth-token']);
       localStorage.setItem('x-auth', response.data['auth-token']);
-      commit(types.AUTHTOKEN, response.data['auth-token']);
+      commit(types.AUTH_TOKEN, response.data['auth-token']);
       localStorage.setItem('email', payload.email);
-      commit(types.EMAIL, payload.email)
+      commit(types.USERNAME, payload.name);
+      commit(types.EMAIL, payload.email);
+      router.push('/map')
     })
     .catch(error => {
       console.log(error, error.response)
@@ -73,4 +75,29 @@ export const retrievePokedex = ({commit}, payload) => {
   http.getAllPokemon({"language": payload}).then((response) => {
     commit(types.POKEDEX, response.data)
   });
+};
+
+export const retrieveUserDetails = ({commit}, payload) => {
+  http.getUserDetail(payload).then((response) => {
+    commit(types.EMAIL, response.data.email);
+    commit(types.USERNAME, response.data.name);
+  });
+};
+
+export const updateUserDetails = ({commit}, payload) => {
+  http.patchUserDetail({name: payload.name, email: payload.email, password: payload.password, passwordNew: payload.passwordNew}, payload.token)
+    .then(response => {
+      console.log(response.data);
+      // console.log('updated successfully!');
+      // console.log("response data auth token: " + response.data['auth-token']);
+      // localStorage.setItem('x-auth', response.data['auth-token']);
+      // localStorage.setItem('email', payload.email);
+      commit(types.AUTH_TOKEN, response.data['auth-token']);
+      commit(types.USERNAME, payload.name);
+      commit(types.EMAIL, payload.email);
+      router.push('/map')
+    })
+    .catch(error => {
+      console.log(error, error.response)
+    })
 };

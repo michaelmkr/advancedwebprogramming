@@ -25,4 +25,7 @@ export default {
   [types.EMAIL] (state, payload) {
     state.email = payload
   },
+  [types.USERNAME] (state, payload) {
+    state.username = payload
+  },
 };

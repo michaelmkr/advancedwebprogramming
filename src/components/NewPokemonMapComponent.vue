@@ -343,7 +343,11 @@
     },
     mounted() {
       this.geolocate();
-      this.getSightings(this.getBounds)
+      this.getSightings(this.getBounds);
+      this.retrieveUserDetails(this.getAuthToken);
+    },
+    beforeUpdate() {
+      this.geolocate();
     },
     computed: {
       ...mapGetters([
@@ -355,12 +359,13 @@
       ]),
     },
     methods: {
-      geolocate() { // TODO watch -> bei Standortveränderung updaten
+      geolocate() {
         navigator.geolocation.watchPosition(position => {
           let currentPosition = {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
+          console.log(currentPosition);
           this.center = currentPosition;
           this.setPosition(currentPosition)
         })
@@ -370,10 +375,11 @@
         'setPosition',
         'setBounds',
         'addSighting',
+        'retrieveUserDetails',
       ]),
 
       doSomething() {
-        console.log(this.$refs.test.$el.innerHTML);
+        console.log(this.getAuthToken);
       },
       // eslint-disable-next-line
       setBoundsD: debounce(function () {
@@ -389,28 +395,6 @@
       //   };
       //   return this.setPosition(newCenter);
       // }, 500),
-      addSightingFromMap() {
-
-        var inputID = prompt("Please enter Pokemon ID:", "25");
-        if (inputID !== null && inputID !== "") {
-          if (isNaN(inputID)) {
-            alert("must be a number!")
-          } else {
-            let sighting = {
-              "id": inputID,
-              "lat": this.getPosition.lat,
-              "lng": this.getPosition.lng,
-              "token": this.getAuthToken
-            };
-            this.addSighting(sighting);
-
-          }
-        } else {
-          alert("cannot be null!")
-        }
-      }
-
-
     },
   };
 

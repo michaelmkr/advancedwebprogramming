@@ -5,7 +5,8 @@ import Map from "./views/Map";
 import About from "./views/About";
 import Login from "./views/Login";
 import Register from "./views/Register";
-import SuggestionComponent from "./components/SuggestionComponent";
+import PokemonList from "./components/PokemonList";
+import UserDetails from "./views/UserDetails";
 
 
 Vue.use(Router);
@@ -40,9 +41,14 @@ export default new Router({
       component: Login,
     },
     {
-      path: '/suggest',
-      name: 'suggest',
-      component: SuggestionComponent,
+      path: '/list',
+      name: 'list',
+      component: PokemonList,
+    },
+    {
+      path: '/user',
+      name: 'user',
+      component: UserDetails,
     },
   ],
 });

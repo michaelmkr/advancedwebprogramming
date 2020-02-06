@@ -19,12 +19,14 @@ const state = {
   },
   pokeDex: [],
   pokeList: [],
-  authToken: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzd2FzdGVkQHBvdGVudGlhbC5hd3AiLCJpYXQiOjE1ODA5Mjc0NjIsInVzZXJJZCI6MTE1LCJuYW1lIjoiTWljaGFlbCJ9.5GFho-s-gfcYDFaMDiF-efyKaRyjadhbOC9bLwlDuwA',
+  authToken: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzd2FzdGVkQHBvdGVudGlhbC5hd3AiLCJpYXQiOjE1ODA5ODEyMTIsInVzZXJJZCI6MTE1LCJuYW1lIjoiTWljaGFlbCJ9.PnUTEWF7ugXc0aX30LeUZ6RKfTsQxcXAC-5M7ifTmGQ',
   snackBar: {
     timestamp: undefined,
     message: undefined,
   },
   pokeDistanceList: [],
+  //authToken: '',
+  username: '',
   email: '',
 };
 

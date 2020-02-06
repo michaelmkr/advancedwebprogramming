@@ -16,12 +16,12 @@ export function postLogin({ email, password }) {
   return apiCom.post('/users/login', { "email":email, "password":password });
 }
 
-export function getUserDetail() {
-  return apiCom.get('/users/details');
+export function getUserDetail(token) {
+  return apiCom.get('/users/details', {headers: {'X-Auth-Token': token}});
 }
 
-export function patchUserDetail(payload) {
-  return apiCom.patch('/users/details', payload);
+export function patchUserDetail(payload, token) {
+  return apiCom.patch('/users/details', payload, {headers: {'X-Auth-Token': token}});
 }
 
 
