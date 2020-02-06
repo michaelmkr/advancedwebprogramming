@@ -1,7 +1,7 @@
 import axios from 'axios';
-import {getAuthToken} from "../store/getters";
+import { getAuthToken } from '../store/getters';
 
-//const baseURL = String('https://virtserver.swaggerhub.com/pgmon/ws18/1.0.0');
+// const baseURL = String('https://virtserver.swaggerhub.com/pgmon/ws18/1.0.0');
 const baseURL = String('https://lbartner-01.media.fhstp.ac.at:4430');
 
 const apiCom = axios.create({
@@ -9,19 +9,19 @@ const apiCom = axios.create({
 });
 
 export function userRegister({ name, email, password }) {
-  return apiCom.post('/users/register', { "name":JSON.stringify(name), "email":JSON.stringify(email), "password":JSON.stringify(password )});
+  return apiCom.post('/users/register', { name: JSON.stringify(name), email: JSON.stringify(email), password: JSON.stringify(password) });
 }
 
 export function postLogin({ email, password }) {
-  return apiCom.post('/users/login', { "email":email, "password":password });
+  return apiCom.post('/users/login', { email, password });
 }
 
 export function getUserDetail(token) {
-  return apiCom.get('/users/details', {headers: {'X-Auth-Token': token}});
+  return apiCom.get('/users/details', { headers: { 'X-Auth-Token': token } });
 }
 
 export function patchUserDetail(payload, token) {
-  return apiCom.patch('/users/details', payload, {headers: {'X-Auth-Token': token}});
+  return apiCom.patch('/users/details', payload, { headers: { 'X-Auth-Token': token } });
 }
 
 
@@ -35,12 +35,13 @@ export function getPokemonDetails({ language, pokedexId }) {
   return apiCom.get(`/pokemon/${language}/${pokedexId}`);
 }
 
-export function postSighting({ id, lat, lng, token }) {
+export function postSighting({
+  id, lat, lng, token,
+}) {
   return apiCom.post('/sightings', {
-    "pokedex-id": id,
-    "position": { "lat": lat, "lng": lng },
-  }, {headers: {'X-Auth-Token': token}}
-  );
+    'pokedex-id': id,
+    position: { lat, lng },
+  }, { headers: { 'X-Auth-Token': token } });
 }
 
 export function getSightingByID({ sightingID }) {
@@ -64,6 +65,6 @@ export function getLanguage() {
   return apiCom.get('/system/languages');
 }
 
-export function getSunriseSunset (payload) {
-  return axios.get('https://api.sunrise-sunset.org/json?lat=' + payload.lat + '&lng=' + payload.lng + '&date=today&formatted=0')
+export function getSunriseSunset(payload) {
+  return axios.get(`https://api.sunrise-sunset.org/json?lat=${payload.lat}&lng=${payload.lng}&date=today&formatted=0`);
 }

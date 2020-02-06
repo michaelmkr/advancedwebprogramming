@@ -6,9 +6,9 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      item: { required: true },
-    }
-  }
+export default {
+  props: {
+    item: { required: true },
+  },
+};
 </script>

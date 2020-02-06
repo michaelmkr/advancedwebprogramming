@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from "./views/Home";
-import Map from "./views/Map";
-import About from "./views/About";
-import Login from "./views/Login";
-import Register from "./views/Register";
-import PokemonList from "./components/PokemonList";
-import UserDetails from "./views/UserDetails";
-import Logout from "./views/Logout";
+import Home from './views/Home';
+import Map from './views/Map';
+import About from './views/About';
+import Login from './views/Login';
+import Register from './views/Register';
+import PokemonList from './components/PokemonList';
+import UserDetails from './views/UserDetails';
+import Logout from './views/Logout';
 
 
 Vue.use(Router);

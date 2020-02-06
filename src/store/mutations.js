@@ -22,13 +22,13 @@ export default {
   [types.POKEDISTANCELIST](state, payload) {
     state.pokeDistanceList = payload;
   },
-  [types.EMAIL] (state, payload) {
-    state.email = payload
+  [types.EMAIL](state, payload) {
+    state.email = payload;
   },
-  [types.USERNAME] (state, payload) {
-    state.username = payload
+  [types.USERNAME](state, payload) {
+    state.username = payload;
   },
-  [types.ISNIGHT] (state, payload) {
-    state.isNight = payload
+  [types.ISNIGHT](state, payload) {
+    state.isNight = payload;
   },
 };

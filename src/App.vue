@@ -57,48 +57,48 @@
 </template>
 
 <script>
-  import {mapGetters, mapActions} from "vuex";
+import { mapGetters, mapActions } from 'vuex';
 
-  export default {
-    data(){
-      return {
-        position:{
-          lat: '',
-          lng: ''
-        }
-      }
-    },
-    mounted() {
-      this.checkIfNight();
-      setTimeout(()=>{this.setDarkTheme();}, 2000)
-    },
-    computed: {
-      ...mapGetters([
-        'getAuthToken',
-        'getIsNight'
-      ]),
-    },
-    methods: {
-      ...mapActions([
-        'checkIfItsNight',
-      ]),
-      checkIfNight() {
-        navigator.geolocation.getCurrentPosition(position => {
-          let currentPosition = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-          console.log("app" + JSON.stringify(currentPosition));
-          this.checkIfItsNight(currentPosition)
-        })
+export default {
+  data() {
+    return {
+      position: {
+        lat: '',
+        lng: '',
       },
-      setDarkTheme() {
-        if (this.getIsNight === true) {
-          document.getElementById("main").style.backgroundColor = 'darkslategray';
-        }
+    };
+  },
+  mounted() {
+    this.checkIfNight();
+    setTimeout(() => { this.setDarkTheme(); }, 2000);
+  },
+  computed: {
+    ...mapGetters([
+      'getAuthToken',
+      'getIsNight',
+    ]),
+  },
+  methods: {
+    ...mapActions([
+      'checkIfItsNight',
+    ]),
+    checkIfNight() {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const currentPosition = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        console.log(`app${JSON.stringify(currentPosition)}`);
+        this.checkIfItsNight(currentPosition);
+      });
+    },
+    setDarkTheme() {
+      if (this.getIsNight === true) {
+        document.getElementById('main').style.backgroundColor = 'darkslategray';
       }
-    }
-  };
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

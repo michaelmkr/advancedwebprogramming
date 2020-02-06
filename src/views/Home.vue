@@ -23,24 +23,20 @@
 </template>
 
 <script>
-  // @ is an alias to /src
+// @ is an alias to /src
 
-  import ComponentButton from "../components/ButtonComponent";
-  import {mapGetters} from "vuex";
-  import router from '../router'
+import { mapGetters } from 'vuex';
+import ComponentButton from '../components/ButtonComponent';
+import router from '../router';
 
-  export default {
-    name: 'home',
-    components: {
-      ComponentButton
-
-    },
-    computed: {
-      ...mapGetters([
-        'getAuthToken',
-      ]),
-    },
-  };
+export default {
+  name: 'home',
+  computed: {
+    ...mapGetters([
+      'getAuthToken',
+    ]),
+  },
+};
 </script>
 
 <style scoped>

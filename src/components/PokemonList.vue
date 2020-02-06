@@ -23,71 +23,71 @@
 </template>
 
 <script>
-  import {mapActions, mapGetters} from "vuex";
-  import {getPokeDex, getPokeList} from "../store/getters";
+import { mapActions, mapGetters } from 'vuex';
+import { getPokeDex, getPokeList } from '../store/getters';
 
-  export default {
-    name: "PokemonList",
-    data() {
-      return {}
+export default {
+  name: 'PokemonList',
+  data() {
+    return {};
+  },
+  mounted() {
+    this.retrievePokedex('de');
+  },
+  computed: {
+    ...mapGetters([
+      'getPokeList',
+      'getPokeDex',
+    ]),
+  },
+  methods: {
+    ...mapActions([
+      'retrievePokedex',
+    ]),
+    getDetails(id) {
+      return this.getPokeDex.find(p => p['pokedex-id'] === id);
     },
-    mounted() {
-      this.retrievePokedex('de');
+    getName(id) {
+      if (id !== null && id !== undefined && !isNaN(id)) {
+        const returnItem = this.getPokeDex.find(p => p['pokedex-id'] === id);
+        if (returnItem !== null && returnItem !== undefined) {
+          return returnItem.name;
+        }
+      } else {
+        return '';
+      }
     },
-    computed: {
-      ...mapGetters([
-        'getPokeList',
-        'getPokeDex'
-      ]),
+    getHeight(id) {
+      if (id !== null && id !== undefined && !isNaN(id)) {
+        const returnItem = this.getPokeDex.find(p => p['pokedex-id'] === id);
+        if (returnItem !== null && returnItem !== undefined) {
+          return returnItem.height;
+        }
+      } else {
+        return '';
+      }
     },
-    methods: {
-      ...mapActions([
-        'retrievePokedex'
-      ]),
-      getDetails(id) {
-        return this.getPokeDex.find(p => p['pokedex-id'] === id);
-      },
-      getName(id) {
-        if (id !== null && id !== undefined && !isNaN(id)){
-          let returnItem = this.getPokeDex.find(p => p['pokedex-id'] === id);
-          if (returnItem !== null && returnItem !== undefined){
-            return returnItem.name;
-          }
-        } else{
-          return '';
+    getWeight(id) {
+      if (id !== null && id !== undefined && !isNaN(id)) {
+        const returnItem = this.getPokeDex.find(p => p['pokedex-id'] === id);
+        if (returnItem !== null && returnItem !== undefined) {
+          return returnItem.weight;
         }
-      },
-      getHeight(id) {
-        if (id !== null && id !== undefined && !isNaN(id)){
-          let returnItem = this.getPokeDex.find(p => p['pokedex-id'] === id);
-          if (returnItem !== null && returnItem !== undefined){
-            return returnItem.height;
-          }
-        } else{
-          return '';
+      } else {
+        return '';
+      }
+    },
+    getTypes(id) {
+      if (id !== null && id !== undefined && !isNaN(id)) {
+        const returnItem = this.getPokeDex.find(p => p['pokedex-id'] === id);
+        if (returnItem !== null && returnItem !== undefined) {
+          return returnItem.types;
         }
-      },
-      getWeight(id) {
-        if (id !== null && id !== undefined && !isNaN(id)){
-          let returnItem = this.getPokeDex.find(p => p['pokedex-id'] === id);
-          if (returnItem !== null && returnItem !== undefined){
-            return returnItem.weight;
-          }
-        } else{
-          return '';
-        }
-      },
-      getTypes(id) {
-        if (id !== null && id !== undefined && !isNaN(id)){
-          let returnItem = this.getPokeDex.find(p => p['pokedex-id'] === id);
-          if (returnItem !== null && returnItem !== undefined){
-            return returnItem.types;
-          }
-        } else{
-          return '';
-        }
-      },
-    }
-  }
+      } else {
+        return '';
+      }
+    },
+  },
+};
 
 </script>

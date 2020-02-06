@@ -31,74 +31,73 @@
 </template>
 
 <script>
-  import {
-    required,
-    email
-  } from 'vuelidate/lib/validators'
+import {
+  required,
+  email,
+} from 'vuelidate/lib/validators';
 
-  import {
-    mapActions, mapGetters
-  } from 'vuex'
+import {
+  mapActions, mapGetters,
+} from 'vuex';
 
-  import InputComponent from "../components/InputComponent";
-  import ComponentButton from "../components/ButtonComponent";
+import InputComponent from '../components/InputComponent';
+import ComponentButton from '../components/ButtonComponent';
 
-  export default {
-    components: {ComponentButton, InputComponent},
-    data() {
-      return {
-        email: '',
-        password: ''
+export default {
+  components: { ComponentButton, InputComponent },
+  data() {
+    return {
+      email: '',
+      password: '',
+    };
+  },
+  computed: {
+    ...mapGetters([
+      'getSnackBar',
+    ]),
+    errorEmail() {
+      let error;
+      if (!this.$v.$error) {
+        error = '';
+      } else if (this.$v.email.required === false) {
+        error = 'E-Mail muss angegeben werden!';
+      } else if (this.$v.email.email === false) {
+        error = 'E-Mail Adresse entspricht nicht dem richtigen Format.';
       }
+      return error;
     },
-    computed: {
-      ...mapGetters([
-        'getSnackBar'
-      ]),
-      errorEmail() {
-        let error;
-        if (!this.$v.$error) {
-          error = ''
-        } else if (this.$v.email.required === false) {
-          error = 'E-Mail muss angegeben werden!'
-        } else if (this.$v.email.email === false) {
-          error = 'E-Mail Adresse entspricht nicht dem richtigen Format.'
-        }
-        return error
-      },
-      errorPassword() {
-        let error;
-        if (!this.$v.$error) {
-          error = ''
-        } else if (this.$v.password.required === false) {
-          error = 'Passwort muss angegeben werden!'
-        }
-        return error
+    errorPassword() {
+      let error;
+      if (!this.$v.$error) {
+        error = '';
+      } else if (this.$v.password.required === false) {
+        error = 'Passwort muss angegeben werden!';
       }
+      return error;
     },
+  },
 
-    methods: {
-      ...mapActions([
-        'submitLogin'
-      ]),
-      submit() {
-        this.$v.$touch();
-        if (!this.$v.$invalid)
-          return this.submitLogin({email: this.email, password: this.password}).then(() => {setTimeout(() => {this.$vtNotify(this.getSnackBar)}, 2000)});
-      }
+  methods: {
+    ...mapActions([
+      'submitLogin',
+    ]),
+    submit() {
+      this.$v.$touch();
+      if (!this.$v.$invalid) return this.submitLogin({ email: this.email, password: this.password }).then(() => { setTimeout(() => { this.$vtNotify(this.getSnackBar); }, 2000); });
     },
+  },
 
-    validations: {
-      email: {
-        required,
-        email
-      },
-      password: {
-        required
-      }
-    }
+  validations: {
+    email: {
+      required,
+      email,
+    },
+    password: {
+      required,
+    },
+  },
 
-  }
+};
 </script>
 
 <style scoped>

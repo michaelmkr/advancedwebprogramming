@@ -33,86 +33,86 @@
 </template>
 
 <script>
-  import debounce from 'lodash.debounce';
-  import {mapActions, mapGetters} from 'vuex';
-  import SuggestionComponent from "./SuggestionComponent";
+import debounce from 'lodash.debounce';
+import { mapActions, mapGetters } from 'vuex';
+import SuggestionComponent from './SuggestionComponent';
 
-  export default {
-    name: 'NewPokemonMapComponent',
-    components: {SuggestionComponent},
-    data() {
-      return {
-        options: {
-          styles: [],
-          mapTypeControl: false,
-          streetViewControl: false,
-          fullscreenControl: false,
-          zoomControl: false,
-          //draggable: false
-        },
-        // center: {lat: 48.2139035, lng: 15.6297068}, // = FH
-        center: {},
-        places: [],
-        pokemonSightings: null,
-        currentPlace: null,
-        bounds: null,
-      };
-    },
-    mounted() {
-      this.geolocate();
-      if (this.getIsNight) {
-        this.options.styles = this.getMapStyleNight;
-      } else {
-        this.options.styles = this.getMapStyleDay;
-      }
-      this.getSightings(this.getBounds);
-      if (this.getAuthToken !== '') {
-        this.retrieveUserDetails(this.getAuthToken);
-      }
-      this.center = this.getPosition;
-    },
-    beforeUpdate() {
-    },
-    computed: {
-      ...mapGetters([
-        'getPokeList',
-        'getPosition',
-        'getPokeDex',
-        'getBounds',
-        'getSnackBar',
-        'getAuthToken',
-        'getMapStyleDay',
-        'getMapStyleNight',
-        'getIsNight',
-      ]),
-    },
-    methods: {
-      geolocate() {
-        navigator.geolocation.watchPosition(position => {
-          let currentPosition = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-          this.center = currentPosition;
-          console.log(currentPosition);
-          this.setPosition(currentPosition);
-        })
+export default {
+  name: 'NewPokemonMapComponent',
+  components: { SuggestionComponent },
+  data() {
+    return {
+      options: {
+        styles: [],
+        mapTypeControl: false,
+        streetViewControl: false,
+        fullscreenControl: false,
+        zoomControl: false,
+        // draggable: false
       },
-      ...mapActions([
-        'getSightings',
-        'setPosition',
-        'setBounds',
-        'addSighting',
-        'retrieveUserDetails',
-        'checkIfItsNight',
-      ]),
-      setBoundsD: debounce(function () {
-        const bounds = this.$refs.mapRef.$mapObject.getBounds();
-        let bound = bounds.toJSON();
-        return this.setBounds(bound)
-      }, 500),
+      // center: {lat: 48.2139035, lng: 15.6297068}, // = FH
+      center: {},
+      places: [],
+      pokemonSightings: null,
+      currentPlace: null,
+      bounds: null,
+    };
+  },
+  mounted() {
+    this.geolocate();
+    if (this.getIsNight) {
+      this.options.styles = this.getMapStyleNight;
+    } else {
+      this.options.styles = this.getMapStyleDay;
+    }
+    this.getSightings(this.getBounds);
+    if (this.getAuthToken !== '') {
+      this.retrieveUserDetails(this.getAuthToken);
+    }
+    this.center = this.getPosition;
+  },
+  beforeUpdate() {
+  },
+  computed: {
+    ...mapGetters([
+      'getPokeList',
+      'getPosition',
+      'getPokeDex',
+      'getBounds',
+      'getSnackBar',
+      'getAuthToken',
+      'getMapStyleDay',
+      'getMapStyleNight',
+      'getIsNight',
+    ]),
+  },
+  methods: {
+    geolocate() {
+      navigator.geolocation.watchPosition((position) => {
+        const currentPosition = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        this.center = currentPosition;
+        console.log(currentPosition);
+        this.setPosition(currentPosition);
+      });
     },
-  };
+    ...mapActions([
+      'getSightings',
+      'setPosition',
+      'setBounds',
+      'addSighting',
+      'retrieveUserDetails',
+      'checkIfItsNight',
+    ]),
+    setBoundsD: debounce(function () {
+      const bounds = this.$refs.mapRef.$mapObject.getBounds();
+      const bound = bounds.toJSON();
+      return this.setBounds(bound);
+    }, 500),
+  },
+};
 
 
 </script>

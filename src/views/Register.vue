@@ -48,100 +48,101 @@
 </template>
 
 <script>
-  import {required, email, minLength, sameAs} from 'vuelidate/lib/validators'
-  import {mapGetters, mapActions} from 'vuex'
-  import ComponentButton from "../components/ButtonComponent";
-  import InputComponent from "../components/InputComponent";
+import {
+  required, email, minLength, sameAs,
+} from 'vuelidate/lib/validators';
+import { mapGetters, mapActions } from 'vuex';
+import ComponentButton from '../components/ButtonComponent';
+import InputComponent from '../components/InputComponent';
 
-  export default {
-    components: {InputComponent, ComponentButton},
-    data() {
-      return {
-        name: '',
-        email: '',
-        password: '',
-        passwordRepeat: ''
+export default {
+  components: { InputComponent, ComponentButton },
+  data() {
+    return {
+      name: '',
+      email: '',
+      password: '',
+      passwordRepeat: '',
+    };
+  },
+  computed: {
+    ...mapGetters([
+      'getSnackBar',
+    ]),
+    errorName() {
+      let error;
+      if (!this.$v.$error) {
+        error = '';
+      } else if (this.$v.name.required === false) {
+        error = 'Name muss angegeben werden!';
+      } else if (this.$v.name.minLength === false) {
+        error = 'Ihr Name muss mindestens 3 Zeichen enthalten!';
       }
+      return error;
     },
-    computed: {
-      ...mapGetters([
-        'getSnackBar'
-      ]),
-      errorName() {
-        let error;
-        if (!this.$v.$error) {
-          error = ''
-        } else if (this.$v.name.required === false) {
-          error = 'Name muss angegeben werden!'
-        } else if (this.$v.name.minLength === false) {
-          error = 'Ihr Name muss mindestens 3 Zeichen enthalten!'
-        }
-        return error
-      },
-      errorEmail() {
-        let error;
-        if (!this.$v.$error) {
-          error = ''
-        } else if (this.$v.email.required === false) {
-          error = 'E-Mail muss angegeben werden!'
-        } else if (this.$v.email.email === false) {
-          error = 'Keine korrekte E-Mail Adresse angegeben!'
-        }
-        return error
-      },
-      errorPassword() {
-        let error;
-        if (!this.$v.$error) {
-          error = ''
-        } else if (this.$v.password.required === false) {
-          error = 'Ein Passwort muss angegeben werden!'
-        } else if (this.$v.password.minLength === false) {
-          error = 'Das Passwort muss mindestens 8 Zeichen enthalten!'
-        }
-        return error
-      },
-      errorPasswordRepeat() {
-        let error;
-        if (!this.$v.$error) {
-          error = ''
-        } else if (this.$v.passwordRepeat.required === false) {
-          error = 'Passwort muss wiederholt werden!'
-        } else if (this.$v.passwordRepeat.sameAsPassword === false) {
-          error = 'Passwörter stimmen nicht überein!'
-        }
-        return error
+    errorEmail() {
+      let error;
+      if (!this.$v.$error) {
+        error = '';
+      } else if (this.$v.email.required === false) {
+        error = 'E-Mail muss angegeben werden!';
+      } else if (this.$v.email.email === false) {
+        error = 'Keine korrekte E-Mail Adresse angegeben!';
       }
+      return error;
     },
-    validations: {
-      name: {
-        required,
-        minLength: minLength(3)
-      },
-      email: {
-        required,
-        email
-      },
-      password: {
-        required,
-        minLength: minLength(8)
-      },
-      passwordRepeat: {
-        required,
-        sameAsPassword: sameAs('password')
+    errorPassword() {
+      let error;
+      if (!this.$v.$error) {
+        error = '';
+      } else if (this.$v.password.required === false) {
+        error = 'Ein Passwort muss angegeben werden!';
+      } else if (this.$v.password.minLength === false) {
+        error = 'Das Passwort muss mindestens 8 Zeichen enthalten!';
       }
+      return error;
     },
-    methods: {
-      ...mapActions([
-        'submitRegister'
-      ]),
-      submit() {
-        this.$v.$touch();
-        if (this.$v.$invalid)
-          return this.submitRegister({name: this.name, email: this.email, password: this.password}).then(() => {setTimeout(() => {this.$vtNotify(this.getSnackBar)}, 2000)});
+    errorPasswordRepeat() {
+      let error;
+      if (!this.$v.$error) {
+        error = '';
+      } else if (this.$v.passwordRepeat.required === false) {
+        error = 'Passwort muss wiederholt werden!';
+      } else if (this.$v.passwordRepeat.sameAsPassword === false) {
+        error = 'Passwörter stimmen nicht überein!';
       }
+      return error;
+    },
+  },
+  validations: {
+    name: {
+      required,
+      minLength: minLength(3),
+    },
+    email: {
+      required,
+      email,
+    },
+    password: {
+      required,
+      minLength: minLength(8),
+    },
+    passwordRepeat: {
+      required,
+      sameAsPassword: sameAs('password'),
+    },
+  },
+  methods: {
+    ...mapActions([
+      'submitRegister',
+    ]),
+    submit() {
+      this.$v.$touch();
+      if (this.$v.$invalid) return this.submitRegister({ name: this.name, email: this.email, password: this.password }).then(() => { setTimeout(() => { this.$vtNotify(this.getSnackBar); }, 2000); });
+    },
 
-    }
-  }
+  },
+};
 </script>
 
 <style scoped>

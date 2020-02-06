@@ -22,57 +22,57 @@
 </template>
 
 <script>
-  import itemTemplate from './ItemTemplate';
-  import * as http from '../APICom/index';
-  import {mapActions, mapGetters} from "vuex";
+import { mapActions, mapGetters } from 'vuex';
+import itemTemplate from './ItemTemplate';
+import * as http from '../APICom/index';
 
-  export default {
-    name: 'SuggestionComponent',
-    data() {
-      return {
-        item: {},
-        items: [],
-        suggestedItems: [],
-        itemTemplate,
-      }
+export default {
+  name: 'SuggestionComponent',
+  data() {
+    return {
+      item: {},
+      items: [],
+      suggestedItems: [],
+      itemTemplate,
+    };
+  },
+  mounted() {
+    this.getPokemon();
+  },
+  computed: {
+    ...mapGetters([
+      'getPosition',
+      'getAuthToken',
+      'getSnackBar',
+    ]),
+  },
+  methods: {
+    ...mapActions([
+      'addSighting',
+    ]),
+    addSightingFromMap() {
+      const sighting = {
+        id: this.item['pokedex-id'],
+        lat: this.getPosition.lat,
+        lng: this.getPosition.lng,
+        token: this.getAuthToken,
+      };
+      this.addSighting(sighting).then(() => { setTimeout(() => { this.$vtNotify(this.getSnackBar); }, 2000); });
     },
-    mounted() {
-      this.getPokemon()
+    getPokemon() {
+      http.getAllPokemon({ language: 'de' }).then((response) => {
+        this.items = response.data;
+      });
     },
-    computed: {
-      ...mapGetters([
-        'getPosition',
-        'getAuthToken',
-        'getSnackBar'
-      ]),
+    itemSelected(item) {
+      this.item = item;
     },
-    methods: {
-      ...mapActions([
-        'addSighting',
-      ]),
-      addSightingFromMap() {
-        let sighting = {
-          "id": this.item['pokedex-id'],
-          "lat": this.getPosition.lat,
-          "lng": this.getPosition.lng,
-          "token": this.getAuthToken
-        };
-        this.addSighting(sighting).then(() => {setTimeout(() => {this.$vtNotify(this.getSnackBar)}, 2000)});
-      },
-      getPokemon() {
-        http.getAllPokemon({"language": "de"}).then((response) => {
-          this.items = response.data;
-        });
-      },
-      itemSelected(item) {
-        this.item = item;
-      },
-      setLabel(item) {
-        return item['name'];
-      },
-      inputChange(text) {
-        this.suggestedItems = this.items.filter(item => item.name.toLowerCase().includes(text.toLowerCase()));
-      },
+    setLabel(item) {
+      return item.name;
     },
-  };
+    inputChange(text) {
+      this.suggestedItems = this.items.filter(item => item.name.toLowerCase().includes(text.toLowerCase()));
+    },
+  },
+};
 </script>
