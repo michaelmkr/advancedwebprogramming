@@ -32,7 +32,7 @@
       doSomething
     </button>
 
-<SuggestionComponent ref="test"></SuggestionComponent>
+    <SuggestionComponent ref="test"></SuggestionComponent>
 
   </div>
 
@@ -66,17 +66,21 @@
     },
     mounted() {
       this.geolocate();
-      if (this.getIsNight){
-        this.options.styles = this.getMapStyleNight;
-      } else {
-        this.options.styles = this.getMapStyleDay;
-      }
+      setTimeout(() => {
+        this.checkIfItsNight(this.getPosition);
+        setTimeout(() => {
+          if (this.getIsNight) {
+            this.options.styles = this.getMapStyleNight;
+          } else {
+            this.options.styles = this.getMapStyleDay;
+          }
+        }, 2000)
+      }, 2000);
       this.getSightings(this.getBounds);
-      if (this.getAuthToken !== ''){
+      if (this.getAuthToken !== '') {
         this.retrieveUserDetails(this.getAuthToken);
       }
       this.center = this.getPosition;
-      this.checkIfItsNight(this.getPosition)
     },
     beforeUpdate() {
     },
@@ -101,7 +105,7 @@
             lng: position.coords.longitude,
           };
           this.center = currentPosition;
-          console.log(currentPosition)
+          console.log(currentPosition);
           this.setPosition(currentPosition);
         })
       },
