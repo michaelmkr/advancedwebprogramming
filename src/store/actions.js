@@ -125,16 +125,21 @@ export const checkIfItsNight = ({commit}, payload) => {
     const deltaRise = sunrise - new Date();
     const deltaSet = sunset - new Date();
 
+    console.log(deltaRise);
+    console.log(deltaSet);
+
     if (deltaRise < 0 && deltaSet > 0){
       //is Day
+      console.log('is day');
       commit(types.ISNIGHT, false);
       setTimeout(commit(types.ISNIGHT, true), deltaSet)
-    }else if (deltaRise > 0 || deltaRise < deltaSet){
+    }else if (deltaSet < 0 && deltaRise < deltaSet){
       //is Night
+      console.log('is night');
       commit(types.ISNIGHT, true);
-      if (deltaRise<deltaSet){
-        setTimeout(commit(types.ISNIGHT, false), deltaRise)
-      }
+    } else if (deltaRise<deltaSet && deltaRise < 0){
+      console.log('is still night');
+      setTimeout(commit(types.ISNIGHT, true), deltaRise)
     }
   })
 };

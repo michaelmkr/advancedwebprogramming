@@ -523,7 +523,7 @@ const state = {
       ]
     }
   ],
-  isNight: undefined,
+  isNight: false,
 };
 
 export default new Vuex.Store({

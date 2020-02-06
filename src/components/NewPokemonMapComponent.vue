@@ -76,6 +76,7 @@
         this.retrieveUserDetails(this.getAuthToken);
       }
       this.center = this.getPosition;
+      this.checkIfItsNight(this.getPosition)
     },
     beforeUpdate() {
     },
@@ -115,6 +116,7 @@
 
       doSomething() {
         //console.log(this.getSnackBar);
+        checkIfItsNight(this.getPosition)
       },
       setBoundsD: debounce(function () {
         const bounds = this.$refs.mapRef.$mapObject.getBounds();
