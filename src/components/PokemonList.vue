@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div :key="item['sighting-id']" style="margin-bottom: 20px;" v-for="item in getPokeList" v-if="item['pokedex-id'] !== null && item['pokedex-id'] !== undefined && !isNaN(item['pokedex-id'])">
-      <div class="demo-card-square mdl-card mdl-shadow--2dp">
+    <div :key="item['sighting-id']" style="margin-bottom: 20px;" v-for="item in getPokeList">
+      <div class="demo-card-square mdl-card mdl-shadow--2dp" v-if="item['pokedex-id'] !== null">
         <img
           :src="'https://raw.githubusercontent.com/michaelmkr/sprites/master/sprites/pokemon/' + item['pokedex-id'] + '.png'"
           height="100" width="100">
@@ -10,15 +10,14 @@
             {{getName(item['pokedex-id'])}}</h2><br>
         </div>
         <div class="mdl-card__actions mdl-card--border">
-          <p>Größe: {{getDetails(item['pokedex-id']).height}}
-            <br>Gewicht: {{getDetails(item['pokedex-id']).weight}}
-            <br><span v-for="(type, index) in getDetails(item['pokedex-id']).types">Typ #{{index + 1}}: {{type}}<br></span>
+          <p>Größe: {{getHeight(item['pokedex-id'])}}
+            <br>Gewicht: {{getWeight(item['pokedex-id'])}}
+            <br><span v-for="(type, index) in getTypes(item['pokedex-id'])">Typ #{{index + 1}}: {{type}}<br></span>
             Lat: {{item.position.lat}}
             <br>Lng: {{item.position.lng}}</p>
         </div>
       </div>
     </div>
-    <button @click="getFilteredList">filter</button>
   </div>
 
 </template>
@@ -50,13 +49,44 @@
       },
       getName(id) {
         if (id !== null && id !== undefined && !isNaN(id)){
-          return this.getPokeDex.find(p => p['pokedex-id'] === id).name;
+          let returnItem = this.getPokeDex.find(p => p['pokedex-id'] === id);
+          if (returnItem !== null && returnItem !== undefined){
+            return returnItem.name;
+          }
+        } else{
+          return '';
         }
       },
-      getFilteredList(){
-        console.log(this.getPokeList);
-        this.getPokeDex.find(p => p['pokedex-id'] === null);
-      }
+      getHeight(id) {
+        if (id !== null && id !== undefined && !isNaN(id)){
+          let returnItem = this.getPokeDex.find(p => p['pokedex-id'] === id);
+          if (returnItem !== null && returnItem !== undefined){
+            return returnItem.height;
+          }
+        } else{
+          return '';
+        }
+      },
+      getWeight(id) {
+        if (id !== null && id !== undefined && !isNaN(id)){
+          let returnItem = this.getPokeDex.find(p => p['pokedex-id'] === id);
+          if (returnItem !== null && returnItem !== undefined){
+            return returnItem.weight;
+          }
+        } else{
+          return '';
+        }
+      },
+      getTypes(id) {
+        if (id !== null && id !== undefined && !isNaN(id)){
+          let returnItem = this.getPokeDex.find(p => p['pokedex-id'] === id);
+          if (returnItem !== null && returnItem !== undefined){
+            return returnItem.types;
+          }
+        } else{
+          return '';
+        }
+      },
     }
   }
 

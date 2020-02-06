@@ -7,6 +7,7 @@ import Login from "./views/Login";
 import Register from "./views/Register";
 import PokemonList from "./components/PokemonList";
 import UserDetails from "./views/UserDetails";
+import Logout from "./views/Logout";
 
 
 Vue.use(Router);
@@ -49,6 +50,11 @@ export default new Router({
       path: '/user',
       name: 'user',
       component: UserDetails,
+    },
+    {
+      path: '/logout',
+      name: 'logout',
+      component: Logout,
     },
   ],
 });

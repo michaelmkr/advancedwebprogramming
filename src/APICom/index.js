@@ -63,3 +63,7 @@ export function getPokemonList({
 export function getLanguage() {
   return apiCom.get('/system/languages');
 }
+
+export function getSunriseSunset ({payload}) {
+  return axios.get('https://api.sunrise-sunset.org/json?lat=' + payload.lat + '&lng=' + payload.lng + '&date=today&formatted=0')
+}

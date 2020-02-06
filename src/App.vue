@@ -10,35 +10,88 @@
           <div class="mdl-layout-spacer"></div>
           <!-- Navigation. We hide it in small screens. -->
           <nav class="mdl-navigation mdl-layout--large-screen-only">
-      <router-link class="mdl-navigation__link" to="/">Home</router-link>
-      <router-link class="mdl-navigation__link" to="/map">Map</router-link>
-      <router-link class="mdl-navigation__link" to="/list">Liste</router-link>
-      <router-link class="mdl-navigation__link" to="/user">User</router-link>
-      <router-link class="mdl-navigation__link" to="/login">Anmelden</router-link>
-      <router-link class="mdl-navigation__link" to="/register">Registrieren</router-link>
+            <router-link class="mdl-navigation__link" to="/">Home</router-link>
+            <router-link class="mdl-navigation__link" to="/map">Map</router-link>
+            <router-link class="mdl-navigation__link" to="/list">Liste</router-link>
+            <router-link :style="{display: getAuthToken === '' ? 'none' : 'block'}"
+                         class="mdl-navigation__link" to="/user">User
+            </router-link>
+            <router-link :style="{display: getAuthToken === '' ? 'none' : 'block'}"
+                         class="mdl-navigation__link" to="/logout">Logout
+            </router-link>
+            <router-link :style="{display: getAuthToken !== '' ? 'none' : 'block'}"
+                         class="mdl-navigation__link" to="/login">Anmelden
+            </router-link>
+            <router-link :style="{display: getAuthToken !== '' ? 'none' : 'block'}"
+                         class="mdl-navigation__link" to="/register">Registrieren
+            </router-link>
           </nav>
         </div>
       </header>
       <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Title</span>
+        <span class="mdl-layout-title">Menu</span>
         <nav class="mdl-navigation">
           <router-link class="mdl-navigation__link" to="/">Home</router-link>
           <router-link class="mdl-navigation__link" to="/map">Map</router-link>
           <router-link class="mdl-navigation__link" to="/list">Liste</router-link>
-           <router-link class="mdl-navigation__link" to="/user">User</router-link>
-           <router-link class="mdl-navigation__link" to="/login">Anmelden</router-link>
-           <router-link class="mdl-navigation__link" to="/register">Registrieren</router-link>
+          <router-link :style="{display: getAuthToken === '' ? 'none' : 'block'}"
+                       class="mdl-navigation__link" to="/user">User
+          </router-link>
+          <router-link :style="{display: getAuthToken === '' ? 'none' : 'block'}"
+                       class="mdl-navigation__link" to="/logout">Logout
+          </router-link>
+          <router-link :style="{display: getAuthToken !== '' ? 'none' : 'block'}"
+                       class="mdl-navigation__link" to="/login">Anmelden
+          </router-link>
+          <router-link :style="{display: getAuthToken !== '' ? 'none' : 'block'}"
+                       class="mdl-navigation__link" to="/register">Registrieren
+          </router-link>
         </nav>
-    </div>
+      </div>
 
-    <main class="mdl-layout__content">
-       <router-view class="main-content"/>
-    </main>
-     </div>
+      <main class="mdl-layout__content" id="main">
+        <router-view class="main-content"/>
+      </main>
+    </div>
   </div>
 </template>
 
+<script>
+  import {mapGetters, mapActions} from "vuex";
+
+  export default {
+    data(){
+      return {
+        position:{
+          lat: '',
+          lng: ''
+        }
+      }
+    },
+    mounted() {
+      this.setDarkTheme();
+    },
+    computed: {
+      ...mapGetters([
+        'getAuthToken',
+        'getIsNight'
+      ]),
+    },
+    methods: {
+      setDarkTheme() {
+        if (this.getIsNight === true) {
+          document.getElementById("main").style.backgroundColor = 'darkslategray';
+        }
+      }
+    }
+  };
+</script>
+
 <style lang="scss" scoped>
+
+  /*main{*/
+  /*  background-color: darkslategray;*/
+  /*}*/
 
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -49,7 +102,7 @@
   }
 
 
-div.mdl-layout__drawer-button {
+  div.mdl-layout__drawer-button {
     display: none;
   }
 
@@ -59,10 +112,10 @@ div.mdl-layout__drawer-button {
     }
   }
 
-.mdl-layout__content{
-  padding:1rem;
+  .mdl-layout__content {
+    padding: 1rem;
 
-}
+  }
 
 
 </style>

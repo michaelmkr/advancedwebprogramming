@@ -2,7 +2,7 @@
   <div class="mdl-grid">
 
     <div class="mdl-card mdl-shadow--16dp util-center util-spacing-h--40px">
-      <div class="mdl-card__title mdl-color--amber-700">
+      <div class="mdl-card__title" style="background-color: #607d8b">
         <h2 class="mdl-card__title-text mdl-color-text--white">User Details</h2>
       </div>
       <div class="mdl-card__supporting-text mdl-grid">

@@ -2,7 +2,7 @@
   <div class="mdl-grid">
 
     <div class="mdl-card mdl-shadow--16dp util-center util-spacing-h--40px">
-      <div class="mdl-card__title mdl-color--amber-700">
+      <div class="mdl-card__title" style="background-color: #607d8b">
         <h2 class="mdl-card__title-text mdl-color-text--white">Registrierung</h2>
       </div>
       <div class="mdl-card__supporting-text mdl-grid">
@@ -92,6 +92,8 @@
           error = ''
         } else if (this.$v.password.required === false) {
           error = 'Ein Passwort muss angegeben werden!'
+        } else if (this.$v.password.minLength === false) {
+          error = 'Das Passwort muss mindestens 8 Zeichen enthalten!'
         }
         return error
       },

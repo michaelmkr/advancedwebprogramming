@@ -28,4 +28,7 @@ export default {
   [types.USERNAME] (state, payload) {
     state.username = payload
   },
+  [types.ISNIGHT] (state, payload) {
+    state.isNight = payload
+  },
 };

@@ -27,7 +27,7 @@
     <br> <br> <br>
 
     <!-- Colored raised button -->
-    <button @click="doSomething"
+    <button @click="checkIfNight"
             class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
       doSomething
     </button>
@@ -42,8 +42,6 @@
   import debounce from 'lodash.debounce';
   import {mapActions, mapGetters} from 'vuex';
   import SuggestionComponent from "./SuggestionComponent";
-  import {getAuthToken, getBounds, getPokeList} from '../store/getters';
-  import {addSighting, getSightings, setBounds, setPosition} from '../store/actions';
 
   export default {
     name: 'NewPokemonMapComponent',
@@ -51,282 +49,7 @@
     data() {
       return {
         options: {
-          styles: [
-            {
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#ebe3cd"
-                }
-              ]
-            },
-            {
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#523735"
-                }
-              ]
-            },
-            {
-              "elementType": "labels.text.stroke",
-              "stylers": [
-                {
-                  "color": "#f5f1e6"
-                }
-              ]
-            },
-            {
-              "featureType": "administrative",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "administrative",
-              "elementType": "geometry.stroke",
-              "stylers": [
-                {
-                  "color": "#c9b2a6"
-                }
-              ]
-            },
-            {
-              "featureType": "administrative.land_parcel",
-              "elementType": "geometry.stroke",
-              "stylers": [
-                {
-                  "color": "#dcd2be"
-                }
-              ]
-            },
-            {
-              "featureType": "administrative.land_parcel",
-              "elementType": "labels",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "administrative.land_parcel",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#ae9e90"
-                }
-              ]
-            },
-            {
-              "featureType": "landscape.natural",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#dfd2ae"
-                }
-              ]
-            },
-            {
-              "featureType": "poi",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "poi",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#dfd2ae"
-                }
-              ]
-            },
-            {
-              "featureType": "poi",
-              "elementType": "labels.text",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "poi",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#93817c"
-                }
-              ]
-            },
-            {
-              "featureType": "poi.park",
-              "elementType": "geometry.fill",
-              "stylers": [
-                {
-                  "color": "#a5b076"
-                }
-              ]
-            },
-            {
-              "featureType": "poi.park",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#447530"
-                }
-              ]
-            },
-            {
-              "featureType": "road",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#f5f1e6"
-                }
-              ]
-            },
-            {
-              "featureType": "road",
-              "elementType": "labels.icon",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "road.arterial",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#fdfcf8"
-                }
-              ]
-            },
-            {
-              "featureType": "road.highway",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#f8c967"
-                }
-              ]
-            },
-            {
-              "featureType": "road.highway",
-              "elementType": "geometry.stroke",
-              "stylers": [
-                {
-                  "color": "#e9bc62"
-                }
-              ]
-            },
-            {
-              "featureType": "road.highway.controlled_access",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#e98d58"
-                }
-              ]
-            },
-            {
-              "featureType": "road.highway.controlled_access",
-              "elementType": "geometry.stroke",
-              "stylers": [
-                {
-                  "color": "#db8555"
-                }
-              ]
-            },
-            {
-              "featureType": "road.local",
-              "elementType": "labels",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "road.local",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#806b63"
-                }
-              ]
-            },
-            {
-              "featureType": "transit",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "transit.line",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#dfd2ae"
-                }
-              ]
-            },
-            {
-              "featureType": "transit.line",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#8f7d77"
-                }
-              ]
-            },
-            {
-              "featureType": "transit.line",
-              "elementType": "labels.text.stroke",
-              "stylers": [
-                {
-                  "color": "#ebe3cd"
-                }
-              ]
-            },
-            {
-              "featureType": "transit.station",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#dfd2ae"
-                }
-              ]
-            },
-            {
-              "featureType": "water",
-              "elementType": "geometry.fill",
-              "stylers": [
-                {
-                  "color": "#b9d3c2"
-                }
-              ]
-            },
-            {
-              "featureType": "water",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#92998d"
-                }
-              ]
-            }
-          ],
+          styles: [],
           mapTypeControl: false,
           streetViewControl: false,
           fullscreenControl: false,
@@ -334,7 +57,7 @@
           //draggable: false
         },
         // center: {lat: 48.2139035, lng: 15.6297068}, // = FH
-        center: {lat: 0, lng: 0},
+        center: {},
         places: [],
         pokemonSightings: null,
         currentPlace: null,
@@ -343,11 +66,17 @@
     },
     mounted() {
       this.geolocate();
+      if (this.getIsNight){
+        this.options.styles = this.getMapStyleNight;
+      } else {
+        this.options.styles = this.getMapStyleDay;
+      }
       this.getSightings(this.getBounds);
-      this.retrieveUserDetails(this.getAuthToken);
+      if (this.getAuthToken !== ''){
+        this.retrieveUserDetails(this.getAuthToken);
+      }
     },
     beforeUpdate() {
-      this.geolocate();
     },
     computed: {
       ...mapGetters([
@@ -355,7 +84,11 @@
         'getPosition',
         'getPokeDex',
         'getBounds',
-        'getAuthToken'
+        'getSnackBar',
+        'getAuthToken',
+        'getMapStyleDay',
+        'getMapStyleNight',
+        'getIsNight',
       ]),
     },
     methods: {
@@ -365,9 +98,8 @@
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
-          console.log(currentPosition);
           this.center = currentPosition;
-          this.setPosition(currentPosition)
+          this.setPosition(currentPosition);
         })
       },
       ...mapActions([
@@ -376,25 +108,26 @@
         'setBounds',
         'addSighting',
         'retrieveUserDetails',
+        'checkIfItsNight',
       ]),
 
       doSomething() {
-        console.log(this.getAuthToken);
+        //console.log(this.getSnackBar);
       },
-      // eslint-disable-next-line
       setBoundsD: debounce(function () {
         const bounds = this.$refs.mapRef.$mapObject.getBounds();
         let bound = bounds.toJSON();
         return this.setBounds(bound)
       }, 500),
-      // eslint-disable-next-linex
-      // setCenterD: debounce(function (cent) {
-      //   const newCenter = {
-      //     lat: cent.lat(),
-      //     lng: cent.lng(),
-      //   };
-      //   return this.setPosition(newCenter);
-      // }, 500),
+      checkIfNight() {
+        navigator.geolocation.getCurrentPosition(position => {
+          let currentPosition = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          this.checkIfItsNight(currentPosition)
+        })
+      },
     },
   };
 

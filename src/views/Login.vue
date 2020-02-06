@@ -1,26 +1,32 @@
 <template>
   <div class="demo">
     <div>
+      <div class="mdl-card mdl-shadow--16dp util-center util-spacing-h--40px">
+        <div class="mdl-card__title" style="background-color: #607d8b">
+          <h2 class="mdl-card__title-text mdl-color-text--white">Login</h2>
+        </div>
+        <div class="mdl-card__supporting-text mdl-grid">
+          <form @submit.stop.prevent="submit" id="formDemo">
+            <input-component :error="errorEmail"
+                             @input="$v.email.$touch()"
+                             label="E-Mail"
+                             required
+                             type="email"
+                             v-model.trim="email"/>
+            <input-component :error="errorPassword"
+                             @input="$v.password.$touch()"
+                             label="Passwort"
+                             required
+                             type="password"
+                             v-model="password"/>
 
-      <form @submit.stop.prevent="submit" id="formDemo">
-        <input-component :error="errorEmail"
-                         @input="$v.email.$touch()"
-                         label="E-Mail"
-                         required
-                         type="email"
-                         v-model.trim="email"/>
-        <input-component :error="errorPassword"
-                         @input="$v.password.$touch()"
-                         label="Passwort"
-                         required
-                         type="password"
-                         v-model="password"/>
-
-        <component-button @click="submit" color="colored" type="raised">Abschicken</component-button>
-      </form>
-
-
+            <component-button @click="submit" color="colored" type="raised">Abschicken
+            </component-button>
+          </form>
+        </div>
+      </div>
     </div>
+
   </div>
 </template>
 
@@ -31,8 +37,9 @@
   } from 'vuelidate/lib/validators'
 
   import {
-    mapActions
+    mapActions, mapGetters
   } from 'vuex'
+
   import InputComponent from "../components/InputComponent";
   import ComponentButton from "../components/ButtonComponent";
 
@@ -45,6 +52,9 @@
       }
     },
     computed: {
+      ...mapGetters([
+        'getSnackBar'
+      ]),
       errorEmail() {
         let error;
         if (!this.$v.$error) {
@@ -74,7 +84,7 @@
       submit() {
         this.$v.$touch();
         if (!this.$v.$invalid)
-          return this.submitLogin({email: this.email, password: this.password})
+          return this.submitLogin({email: this.email, password: this.password}).then(() => {setTimeout(this.$vtNotify(this.getSnackBar), 2000)});
       }
     },
 
