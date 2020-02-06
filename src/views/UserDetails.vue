@@ -72,13 +72,16 @@
     },
     mounted() {
       this.retrieveUserDetails(this.getAuthToken);
-      this.name = this.getUsername;
-      this.email = this.getEmail;
+      setTimeout(()=>{
+        this.name = this.getUsername;
+        this.email = this.getEmail;
+      }, 1500)
     },
     computed: {
       ...mapGetters([
         'getAuthToken',
         'getUsername',
+        'getEmail',
         'getSnackBar',
       ]),
       errorName() {

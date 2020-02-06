@@ -69,7 +69,8 @@
       }
     },
     mounted() {
-      this.setDarkTheme();
+      this.checkIfNight();
+      setTimeout(()=>{this.setDarkTheme();}, 2000)
     },
     computed: {
       ...mapGetters([
@@ -78,6 +79,19 @@
       ]),
     },
     methods: {
+      ...mapActions([
+        'checkIfItsNight',
+      ]),
+      checkIfNight() {
+        navigator.geolocation.getCurrentPosition(position => {
+          let currentPosition = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          console.log("app" + JSON.stringify(currentPosition));
+          this.checkIfItsNight(currentPosition)
+        })
+      },
       setDarkTheme() {
         if (this.getIsNight === true) {
           document.getElementById("main").style.backgroundColor = 'darkslategray';

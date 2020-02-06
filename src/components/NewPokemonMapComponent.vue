@@ -26,12 +26,6 @@
 
     <br> <br> <br>
 
-    <!-- Colored raised button -->
-    <button @click="checkIfNight"
-            class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-      doSomething
-    </button>
-
     <SuggestionComponent ref="test"></SuggestionComponent>
 
   </div>
@@ -66,16 +60,11 @@
     },
     mounted() {
       this.geolocate();
-      setTimeout(() => {
-        this.checkIfItsNight(this.getPosition);
-        setTimeout(() => {
-          if (this.getIsNight) {
-            this.options.styles = this.getMapStyleNight;
-          } else {
-            this.options.styles = this.getMapStyleDay;
-          }
-        }, 2000)
-      }, 2000);
+      if (this.getIsNight) {
+        this.options.styles = this.getMapStyleNight;
+      } else {
+        this.options.styles = this.getMapStyleDay;
+      }
       this.getSightings(this.getBounds);
       if (this.getAuthToken !== '') {
         this.retrieveUserDetails(this.getAuthToken);
@@ -117,25 +106,11 @@
         'retrieveUserDetails',
         'checkIfItsNight',
       ]),
-
-      doSomething() {
-        //console.log(this.getSnackBar);
-        checkIfItsNight(this.getPosition)
-      },
       setBoundsD: debounce(function () {
         const bounds = this.$refs.mapRef.$mapObject.getBounds();
         let bound = bounds.toJSON();
         return this.setBounds(bound)
       }, 500),
-      checkIfNight() {
-        navigator.geolocation.getCurrentPosition(position => {
-          let currentPosition = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-          this.checkIfItsNight(currentPosition)
-        })
-      },
     },
   };
 
