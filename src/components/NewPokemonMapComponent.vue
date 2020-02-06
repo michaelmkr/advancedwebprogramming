@@ -75,6 +75,7 @@
       if (this.getAuthToken !== ''){
         this.retrieveUserDetails(this.getAuthToken);
       }
+      this.center = this.getPosition;
     },
     beforeUpdate() {
     },
@@ -99,6 +100,7 @@
             lng: position.coords.longitude,
           };
           this.center = currentPosition;
+          console.log(currentPosition)
           this.setPosition(currentPosition);
         })
       },
