@@ -79,7 +79,7 @@
       ...mapGetters([
         'getAuthToken',
         'getUsername',
-        'getEmail',
+        'getSnackBar',
       ]),
       errorName() {
         let error;
@@ -164,7 +164,7 @@
       submit() {
         this.$v.$touch();
         if (this.$v.$invalid)
-          return this.updateUserDetails({name: this.name, email: this.email, password: this.passwordOld, passwordNew: this.password, token: this.getAuthToken});
+          return this.updateUserDetails({name: this.name, email: this.email, password: this.passwordOld, passwordNew: this.password, token: this.getAuthToken}).then(() => {setTimeout(() => {this.$vtNotify(this.getSnackBar)}, 2000)});
       },
 
     }

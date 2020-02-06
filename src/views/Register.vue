@@ -49,7 +49,7 @@
 
 <script>
   import {required, email, minLength, sameAs} from 'vuelidate/lib/validators'
-  import {mapActions} from 'vuex'
+  import {mapGetters, mapActions} from 'vuex'
   import ComponentButton from "../components/ButtonComponent";
   import InputComponent from "../components/InputComponent";
 
@@ -64,6 +64,9 @@
       }
     },
     computed: {
+      ...mapGetters([
+        'getSnackBar'
+      ]),
       errorName() {
         let error;
         if (!this.$v.$error) {
@@ -134,7 +137,7 @@
       submit() {
         this.$v.$touch();
         if (this.$v.$invalid)
-          return this.submitRegister({name: this.name, email: this.email, password: this.password})
+          return this.submitRegister({name: this.name, email: this.email, password: this.password}).then(() => {setTimeout(() => {this.$vtNotify(this.getSnackBar)}, 2000)});
       }
 
     }

@@ -84,7 +84,7 @@
       submit() {
         this.$v.$touch();
         if (!this.$v.$invalid)
-          return this.submitLogin({email: this.email, password: this.password}).then(() => {setTimeout(this.$vtNotify(this.getSnackBar), 2000)});
+          return this.submitLogin({email: this.email, password: this.password}).then(() => {setTimeout(() => {this.$vtNotify(this.getSnackBar)}, 2000)});
       }
     },
 

@@ -42,7 +42,8 @@
     computed: {
       ...mapGetters([
         'getPosition',
-        'getAuthToken'
+        'getAuthToken',
+        'getSnackBar'
       ]),
     },
     methods: {
@@ -56,7 +57,7 @@
           "lng": this.getPosition.lng,
           "token": this.getAuthToken
         };
-        this.addSighting(sighting);
+        this.addSighting(sighting).then(() => {setTimeout(() => {this.$vtNotify(this.getSnackBar)}, 2000)});
       },
       getPokemon() {
         http.getAllPokemon({"language": "de"}).then((response) => {
