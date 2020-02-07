@@ -1,12 +1,12 @@
 <template>
-  <div class="mdl-grid">
-
-    <div class="mdl-card mdl-shadow--16dp util-center util-spacing-h--40px">
-      <div class="mdl-card__title" style="background-color: #607d8b">
-        <h2 class="mdl-card__title-text mdl-color-text--white">User Details</h2>
-      </div>
-      <div class="mdl-card__supporting-text mdl-grid">
-
+  <div class="demo">
+    <mdl-card :depth="2" class="cardForm util-center">
+      <template #title>
+        <div class="mdl-card__title" style="background-color: #607d8b; width: 100%;">
+          <h2 class="mdl-card__title-text mdl-color-text--white">Registrierung</h2>
+        </div>
+      </template>
+      <template #content>
 
         <form @submit.stop.prevent="submit" id="formSubmit">
           <input-component :error="errorName" @input="$v.text.$touch()"
@@ -19,30 +19,26 @@
                            required
                            type="email"
                            v-model.trim="email"/>
-          <input-component :error="errorPasswordOld" @input="$v.passwordOld.$touch()"
-                           label="Altes Passwort"
-                           required
-                           type="password"
-                           v-model="passwordOld"/>
           <input-component :error="errorPassword" @input="$v.password.$touch()"
-                           label="Neues Passwort"
+                           label="Passwort"
                            required
                            type="password"
                            v-model="password"/>
           <input-component :error="errorPasswordRepeat" @input="$v.passwordRepeat.$touch()"
-                           label="Neues Passwort wiederholen"
+                           label="Passwort wiederholen"
                            required
                            type="password"
                            v-model.trim="passwordRepeat"/>
         </form>
-        <component-button color="colored" form="formSubmit" type="raised">Ändern
+      </template>
+      <template #actions>
+        <component-button color="colored" form="formSubmit" type="raised">Registrieren
         </component-button>
-
-
-      </div>
-    </div>
+      </template>
+    </mdl-card>
   </div>
 </template>
+
 <script>
 import {
   required,
@@ -55,41 +51,31 @@ import {
   mapActions, mapGetters,
 } from 'vuex';
 import InputComponent from '../components/InputComponent';
+import MdlCard from '../components/CardComponent';
 import ComponentButton from '../components/ButtonComponent';
 
 export default {
-  components: { InputComponent, ComponentButton },
+  components: { ComponentButton, InputComponent, MdlCard },
   data() {
     return {
       text: '',
       email: '',
-      passwordOld: '',
       password: '',
       passwordRepeat: '',
     };
   },
-  mounted() {
-    this.retrieveUserDetails(this.getAuthToken);
-    setTimeout(() => {
-      this.text = this.getUsername;
-      this.email = this.getEmail;
-    }, 1500);
-  },
   computed: {
     ...mapGetters([
-      'getUsername',
-      'getEmail',
       'getSnackBar',
-      'getAuthToken',
     ]),
     errorName() {
       let error;
       if (!this.$v.$error) {
         error = '';
       } else if (this.$v.text.required === false) {
-        error = 'Name muss angegeben werden!';
+        error = 'Name ist ein Pflichtfeld';
       } else if (this.$v.text.minLength === false) {
-        error = 'Name muss mindestens 3 Zeichen enthalten';
+        error = 'Name muss mind. 3 Zeichen enthalten';
       }
       return error;
     },
@@ -98,29 +84,21 @@ export default {
       if (!this.$v.$error) {
         error = '';
       } else if (this.$v.email.required === false) {
-        error = 'E-Mail muss angegeben werden!';
+        error = 'Email ist ein Pflichtfeld';
       } else if (this.$v.email.email === false) {
-        error = 'E-Mail Format nicht korrekt!';
+        error = 'E-Mail muss korrektem Format entsprechen';
       }
       return error;
     },
-    errorPasswordOld() {
-      let error;
-      if (!this.$v.$error) {
-        error = '';
-      } else if (this.$v.passwordOld.required === false) {
-        error = 'Ihr altes Passwort muss angegeben werden!';
-      }
-      return error;
-    },
+
     errorPassword() {
       let error;
       if (!this.$v.$error) {
         error = '';
       } else if (this.$v.password.required === false) {
-        error = 'Ein neues Passwort muss angegeben werden!';
+        error = 'Passwort ist ein Pflichtfeld';
       } else if (this.$v.password.minLength === false) {
-        error = 'Das neue Passwort muss mindestens 8 Zeichen enthalten.';
+        error = 'Passwort muss mind. 8 Zeichen enthalten';
       }
       return error;
     },
@@ -129,26 +107,24 @@ export default {
       if (!this.$v.$error) {
         error = '';
       } else if (this.$v.passwordRepeat.required === false) {
-        error = 'Das neue Passwort muss wiederholt werden!';
+        error = 'Passwortwiederholung wird benötigt';
       } else if (this.$v.passwordRepeat.sameAsPassword === false) {
-        error = 'Die Passwörter müssen übereinstimmen!';
+        error = 'Passwörter müssen übereinstimmen';
       }
       return error;
     },
 
   },
+
   methods: {
     ...mapActions([
-      'updateUserDetails',
-      'retrieveUserDetails',
+      'submitRegister',
+      'setSnackbarMessage',
     ]),
     submit() {
       this.$v.$touch();
-      if (!this.$v.$invalid) {
-        return this.updateUserDetails({
-          name: this.name, email: this.email, password: this.passwordOld, passwordNew: this.password, token: this.getAuthToken,
-        }).then(() => { setTimeout(() => { this.$vtNotify(this.getSnackBar); }, 2000); });
-      }
+      if (this.$v.$invalid) return;
+      this.submitRegister({ text: this.text, email: this.email, password: this.password }).then(() => { setTimeout(() => { this.$vtNotify(this.getSnackBar); }, 2000); });
     },
   },
 
@@ -160,9 +136,6 @@ export default {
     email: {
       required,
       email,
-    },
-    passwordOld: {
-      required,
     },
     password: {
       required,
@@ -178,6 +151,10 @@ export default {
 </script>
 
 <style scoped>
+  input-component{
+    color: white;
+  }
+
   .errorMessage {
     color: red
   }

@@ -6,57 +6,60 @@
         <h2 class="mdl-card__title-text mdl-color-text--white">Registrierung</h2>
       </div>
       <div class="mdl-card__supporting-text mdl-grid">
-
-
-        <form @submit.stop.prevent="submit" id="formSubmit">
-          <input-component :error="errorName" @input="$v.text.$touch()"
+        <form @submit.stop.prevent="submit">
+          <input-component :error="errorName"
+                           @input="$v.name.$touch()"
                            label="Name"
                            required
                            type="text"
-                           v-model.trim="text"/>
-          <input-component :error="errorEmail" @input="$v.email.$touch()"
+                           v-model.trim="name"
+          />
+          <input-component :error="errorEmail"
+                           @input="$v.email.$touch()"
                            label="E-Mail"
                            required
                            type="email"
-                           v-model.trim="email"/>
-          <input-component :error="errorPassword" @input="$v.password.$touch()"
+                           v-model.trim="email"
+          />
+          <input-component :error="errorPassword"
+                           @input="$v.password.$touch()"
                            label="Passwort"
                            required
                            type="password"
-                           v-model="password"/>
-          <input-component :error="errorPasswordRepeat" @input="$v.passwordRepeat.$touch()"
+                           v-model.trim="password"
+          />
+          <input-component :error="errorPasswordRepeat"
+                           @input="$v.passwordRepeat.$touch()"
                            label="Passwort wiederholen"
                            required
                            type="password"
-                           v-model.trim="passwordRepeat"/>
+                           v-model.trim="passwordRepeat"
+          />
+          <br>
+
+          <div align="center" class="mdl-cell mdl-cell--12-col send-button">
+            <component-button color="colored" type="raised" @click="submit">Abschicken</component-button>
+          </div>
+
         </form>
-        <component-button color="colored" form="formSubmit" type="raised">Abschicken
-        </component-button>
-
-
       </div>
     </div>
   </div>
 </template>
+
 <script>
 import {
-  required,
-  email,
-  minLength,
-  sameAs,
+  required, email, minLength, sameAs,
 } from 'vuelidate/lib/validators';
-
-import {
-  mapActions, mapGetters,
-} from 'vuex';
-import InputComponent from '../components/InputComponent';
+import { mapGetters, mapActions } from 'vuex';
 import ComponentButton from '../components/ButtonComponent';
+import InputComponent from '../components/InputComponent';
 
 export default {
   components: { InputComponent, ComponentButton },
   data() {
     return {
-      text: '',
+      name: '',
       email: '',
       password: '',
       passwordRepeat: '',
@@ -70,10 +73,10 @@ export default {
       let error;
       if (!this.$v.$error) {
         error = '';
-      } else if (this.$v.text.required === false) {
-        error = 'Name ist ein Pflichtfeld';
-      } else if (this.$v.text.minLength === false) {
-        error = 'Name muss mind. 3 Zeichen enthalten';
+      } else if (this.$v.name.required === false) {
+        error = 'Name muss angegeben werden!';
+      } else if (this.$v.name.minLength === false) {
+        error = 'Ihr Name muss mindestens 3 Zeichen enthalten!';
       }
       return error;
     },
@@ -82,21 +85,20 @@ export default {
       if (!this.$v.$error) {
         error = '';
       } else if (this.$v.email.required === false) {
-        error = 'Email ist ein Pflichtfeld';
+        error = 'E-Mail muss angegeben werden!';
       } else if (this.$v.email.email === false) {
-        error = 'E-Mail muss korrektem Format entsprechen';
+        error = 'Keine korrekte E-Mail Adresse angegeben!';
       }
       return error;
     },
-
     errorPassword() {
       let error;
       if (!this.$v.$error) {
         error = '';
       } else if (this.$v.password.required === false) {
-        error = 'Passwort ist ein Pflichtfeld';
+        error = 'Ein Passwort muss angegeben werden!';
       } else if (this.$v.password.minLength === false) {
-        error = 'Passwort muss mind. 8 Zeichen enthalten';
+        error = 'Das Passwort muss mindestens 8 Zeichen enthalten!';
       }
       return error;
     },
@@ -105,37 +107,15 @@ export default {
       if (!this.$v.$error) {
         error = '';
       } else if (this.$v.passwordRepeat.required === false) {
-        error = 'Passwortwiederholung wird benötigt';
+        error = 'Passwort muss wiederholt werden!';
       } else if (this.$v.passwordRepeat.sameAsPassword === false) {
-        error = 'Passwörter müssen übereinstimmen';
+        error = 'Passwörter stimmen nicht überein!';
       }
       return error;
     },
-
   },
-
-  methods: {
-    ...mapActions([
-      'submitRegister',
-    ]),
-    submit() {
-      this.$v.$touch();
-      if (!this.$v.$invalid) {
-        return this.submitRegister({
-          text: this.text,
-          email: this.email,
-          password: this.password,
-        }).then(() => {
-          setTimeout(() => {
-            this.$vtNotify(this.getSnackBar);
-          }, 2000);
-        });
-      }
-    },
-  },
-
   validations: {
-    text: {
+    name: {
       required,
       minLength: minLength(3),
     },
@@ -152,7 +132,16 @@ export default {
       sameAsPassword: sameAs('password'),
     },
   },
+  methods: {
+    ...mapActions([
+      'submitRegister',
+    ]),
+    submit() {
+      this.$v.$touch();
+      if (this.$v.$invalid) return this.submitRegister({ name: this.name, email: this.email, password: this.password }).then(() => { setTimeout(() => { this.$vtNotify(this.getSnackBar); }, 2000); });
+    },
 
+  },
 };
 </script>
 
@@ -169,14 +158,12 @@ export default {
     max-width: 512px;
   }
 
-  util-no-decoration {
-    text-decoration: none;
+  .util-spacing-h--40px {
+    margin-top: 40px;
+    margin-bottom: 40px
   }
 
-  .cardForm {
-    margin: auto;
-    min-width: 200px;
-    max-width: 500px;
-    width: auto;
+  .util-no-decoration {
+    text-decoration: none;
   }
 </style>
