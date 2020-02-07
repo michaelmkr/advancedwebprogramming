@@ -8,7 +8,7 @@ import Register from './views/Register';
 import PokemonList from './components/PokemonList';
 import UserDetails from './views/UserDetails';
 import Logout from './views/Logout';
-import store from './store/index';
+
 
 Vue.use(Router);
 
@@ -35,27 +35,11 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: Register,
-      beforeEnter: (to, from, next) => {
-        if (store.state.authToken !== '') {
-          alert('Sie sind bereits eingeloggt!');
-          next('/');
-        } else {
-          next();
-        }
-      },
     },
     {
       path: '/login',
       name: 'login',
       component: Login,
-      beforeEnter: (to, from, next) => {
-        if (store.state.authToken !== '') {
-          alert('Sie sind bereits eingeloggt!');
-          next('/');
-        } else {
-          next();
-        }
-      },
     },
     {
       path: '/list',
@@ -66,14 +50,6 @@ export default new Router({
       path: '/user',
       name: 'user',
       component: UserDetails,
-      beforeEnter: (to, from, next) => {
-        if (store.state.authToken === '') {
-          alert('Sie haben keine Berechtigung für diese Route!');
-          next('/');
-        } else {
-          next();
-        }
-      },
     },
     {
       path: '/logout',

@@ -44,137 +44,136 @@
   </div>
 </template>
 <script>
-import {
-  required,
-  email,
-  minLength,
-  sameAs,
-} from 'vuelidate/lib/validators';
+  import {
+    required,
+    email,
+    minLength,
+    sameAs
+  } from 'vuelidate/lib/validators'
 
-import {
-  mapActions, mapGetters,
-} from 'vuex';
-import InputComponent from '../components/InputComponent';
-import ComponentButton from '../components/ButtonComponent';
+  import {
+    mapActions, mapGetters
+  } from 'vuex'
+  import InputComponent from "../components/InputComponent";
+  import ComponentButton from "../components/ButtonComponent";
 
-export default {
-  components: { InputComponent, ComponentButton },
-  data() {
-    return {
-      text: '',
-      email: '',
-      passwordOld: '',
-      password: '',
-      passwordRepeat: '',
-    };
-  },
-  mounted() {
-    this.retrieveUserDetails(this.getAuthToken);
-    setTimeout(() => {
-      this.text = this.getUsername;
-      this.email = this.getEmail;
-    }, 1500);
-  },
-  computed: {
-    ...mapGetters([
-      'getUsername',
-      'getEmail',
-      'getSnackBar',
-      'getAuthToken',
-    ]),
-    errorName() {
-      let error;
-      if (!this.$v.$error) {
-        error = '';
-      } else if (this.$v.text.required === false) {
-        error = 'Name muss angegeben werden!';
-      } else if (this.$v.text.minLength === false) {
-        error = 'Name muss mindestens 3 Zeichen enthalten';
+  export default {
+    components: {InputComponent, ComponentButton},
+    data() {
+      return {
+        text: '',
+        email: '',
+        passwordOld: '',
+        password: '',
+        passwordRepeat: ''
       }
-      return error;
     },
-    errorEmail() {
-      let error;
-      if (!this.$v.$error) {
-        error = '';
-      } else if (this.$v.email.required === false) {
-        error = 'E-Mail muss angegeben werden!';
-      } else if (this.$v.email.email === false) {
-        error = 'E-Mail Format nicht korrekt!';
-      }
-      return error;
+    mounted() {
+      this.retrieveUserDetails(this.getAuthToken);
+      setTimeout(() => {
+        this.text = this.getUsername;
+        this.email = this.getEmail;
+      }, 1500);
     },
-    errorPasswordOld() {
-      let error;
-      if (!this.$v.$error) {
-        error = '';
-      } else if (this.$v.passwordOld.required === false) {
-        error = 'Ihr altes Passwort muss angegeben werden!';
+    computed: {
+      ...mapGetters([
+        'getUsername',
+        'getEmail',
+        'getSnackBar',
+        'getAuthToken',
+      ]),
+      errorName() {
+        let error;
+        if (!this.$v.$error) {
+          error = ''
+        } else if (this.$v.text.required === false) {
+          error = 'Name muss angegeben werden!'
+        } else if (this.$v.text.minLength === false) {
+          error = 'Name muss mindestens 3 Zeichen enthalten'
+        }
+        return error
+      },
+      errorEmail() {
+        let error;
+        if (!this.$v.$error) {
+          error = ''
+        } else if (this.$v.email.required === false) {
+          error = 'E-Mail muss angegeben werden!'
+        } else if (this.$v.email.email === false) {
+          error = 'E-Mail Format nicht korrekt!'
+        }
+        return error
+      },
+      errorPasswordOld() {
+        let error;
+        if (!this.$v.$error) {
+          error = ''
+        } else if (this.$v.passwordOld.required === false) {
+          error = 'Ihr altes Passwort muss angegeben werden!'
+        }
+        return error
+      },
+      errorPassword() {
+        let error;
+        if (!this.$v.$error) {
+          error = ''
+        } else if (this.$v.password.required === false) {
+          error = 'Ein neues Passwort muss angegeben werden!'
+        } else if (this.$v.password.minLength === false) {
+          error = 'Das neue Passwort muss mindestens 8 Zeichen enthalten.'
+        }
+        return error
+      },
+      errorPasswordRepeat() {
+        let error;
+        if (!this.$v.$error) {
+          error = ''
+        } else if (this.$v.passwordRepeat.required === false) {
+          error = 'Das neue Passwort muss wiederholt werden!'
+        } else if (this.$v.passwordRepeat.sameAsPassword === false) {
+          error = 'Die Passwörter müssen übereinstimmen!'
+        }
+        return error
       }
-      return error;
+
     },
-    errorPassword() {
-      let error;
-      if (!this.$v.$error) {
-        error = '';
-      } else if (this.$v.password.required === false) {
-        error = 'Ein neues Passwort muss angegeben werden!';
-      } else if (this.$v.password.minLength === false) {
-        error = 'Das neue Passwort muss mindestens 8 Zeichen enthalten.';
+    methods: {
+      ...mapActions([
+        'updateUserDetails',
+        'retrieveUserDetails',
+      ]),
+      submit() {
+        this.$v.$touch();
+        if (!this.$v.$invalid)
+          return this.updateUserDetails({
+            name: this.name, email: this.email, password: this.passwordOld, passwordNew: this.password, token: this.getAuthToken,
+          }).then(() => { setTimeout(() => { this.$vtNotify(this.getSnackBar); }, 2000); });
       }
-      return error;
-    },
-    errorPasswordRepeat() {
-      let error;
-      if (!this.$v.$error) {
-        error = '';
-      } else if (this.$v.passwordRepeat.required === false) {
-        error = 'Das neue Passwort muss wiederholt werden!';
-      } else if (this.$v.passwordRepeat.sameAsPassword === false) {
-        error = 'Die Passwörter müssen übereinstimmen!';
-      }
-      return error;
     },
 
-  },
-  methods: {
-    ...mapActions([
-      'updateUserDetails',
-      'retrieveUserDetails',
-    ]),
-    submit() {
-      this.$v.$touch();
-      if (!this.$v.$invalid) {
-        return this.updateUserDetails({
-          name: this.name, email: this.email, password: this.passwordOld, passwordNew: this.password, token: this.getAuthToken,
-        }).then(() => { setTimeout(() => { this.$vtNotify(this.getSnackBar); }, 2000); });
+    validations: {
+      text: {
+        required,
+        minLength: minLength(3)
+      },
+      email: {
+        required,
+        email
+      },
+      passwordOld: {
+        required,
+      },
+      password: {
+        required,
+        minLength: minLength(8)
+      },
+      passwordRepeat: {
+        required,
+        sameAsPassword: sameAs('password')
       }
-    },
-  },
+    }
 
-  validations: {
-    text: {
-      required,
-      minLength: minLength(3),
-    },
-    email: {
-      required,
-      email,
-    },
-    passwordOld: {
-      required,
-    },
-    password: {
-      required,
-      minLength: minLength(8),
-    },
-    passwordRepeat: {
-      required,
-      sameAsPassword: sameAs('password'),
-    },
-  },
-
-};
+  }
 </script>
 
 <style scoped>

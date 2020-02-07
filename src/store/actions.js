@@ -130,7 +130,7 @@ export const checkIfItsNight = ({ commit }, payload) => {
       // is Day
       console.log('is day');
       commit(types.ISNIGHT, false);
-      // setTimeout(commit(types.ISNIGHT, true), deltaSet);
+      //setTimeout(commit(types.ISNIGHT, true), deltaSet);
     } else if (deltaSet < 0 && deltaRise < deltaSet) {
       // is Night
       console.log('is night');
