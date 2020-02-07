@@ -3,26 +3,23 @@
     <div>
       <div class="mdl-card mdl-shadow--16dp util-center util-spacing-h--40px">
         <div class="mdl-card__title" style="background-color: #607d8b">
-          <h2 class="mdl-card__title-text mdl-color-text--white">Login</h2>
+          <h2 class="mdl-card__title-text mdl-color-text--white">Anmelden</h2>
         </div>
         <div class="mdl-card__supporting-text mdl-grid">
-          <form @submit.stop.prevent="submit" id="formDemo">
-            <input-component :error="errorEmail"
-                             @input="$v.email.$touch()"
-                             label="E-Mail"
-                             required
-                             type="email"
-                             v-model.trim="email"/>
-            <input-component :error="errorPassword"
-                             @input="$v.password.$touch()"
-                             label="Passwort"
-                             required
-                             type="password"
-                             v-model="password"/>
+            <form @submit.stop.prevent="submit" id="formSubmit">
+              <input-component label="E-Mail" type="email"
+                               required
+                               v-model.trim="email"
+                               :error="errorEmail"
+                               @input="$v.email.$touch()" />
+              <input-component label="Passwort" type="password"
+                               required
+                               v-model="password"
+                               :error="errorPassword"
+                               @input="$v.password.$touch()" />
+            </form>
+            <component-button type="raised" color="colored" form="formSubmit">Login</component-button>
 
-            <component-button @click="submit" color="colored" type="raised">Abschicken
-            </component-button>
-          </form>
         </div>
       </div>
     </div>

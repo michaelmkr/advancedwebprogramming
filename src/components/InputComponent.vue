@@ -20,49 +20,48 @@
 </template>
 
 <script>
-import { upgradeElement } from '@/tools';
-
-export default {
-  name: 'InputComponent',
-  props: {
-    disabled: {
-      type: Boolean,
+  import { upgradeElement } from '../tools/index'
+  export default {
+    props: {
+      disabled: {
+        type: Boolean
+      },
+      type: {
+        type: String,
+        validator: value => ['text', 'email', 'password', 'passwordRepeat', 'passwordOld'].includes(value)
+      },
+      label: {
+        type: String
+      },
+      value: {
+        type: String,
+        required: Boolean
+      },
+      error: {
+        type: String
+      }
     },
-    type: {
-      type: String,
-      validator: value => ['text', 'email', 'password', 'passwordRepeat'].includes(value),
+    computed: {
+      labelName () {
+        return this.label + (this.required ? ' *' : '')
+      },
+      inputListeners () {
+        var vm = this
+        return Object.assign({},
+          this.$listeners,
+          {
+            // This ensures that the component works with v-model
+            input: function (event) {
+              vm.$emit('input', event.target.value)
+            }
+          }
+        )
+      }
     },
-    label: {
-      type: String,
-    },
-    value: {
-      type: String,
-      required: Boolean,
-    },
-    error: {
-      type: String,
-    },
-  },
-  computed: {
-    labelName() {
-      return this.label + (this.required ? ' *' : '');
-    },
-    inputListeners() {
-      const vm = this;
-      return Object.assign({},
-        this.$listeners,
-        {
-          // This ensures that the component works with v-model
-          input(event) {
-            vm.$emit('input', event.target.value);
-          },
-        });
-    },
-  },
-  mounted() {
-    upgradeElement(this.$refs.inputWrapper);
-  },
-};
+    mounted () {
+      upgradeElement(this.$refs.inputWrapper)
+    }
+  }
 </script>
 
 <style>

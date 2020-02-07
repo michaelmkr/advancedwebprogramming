@@ -19,7 +19,7 @@ const state = {
   },
   pokeDex: [],
   pokeList: [],
-  authToken: '',
+  authToken: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzd2FzdGVkQHBvdGVudGlhbC5hd3AiLCJpYXQiOjE1ODEwNzk1NDcsInVzZXJJZCI6MTE1LCJuYW1lIjoiTWljaGFlbCJ9.hHsggg3zPFhyC02Fp9VJOlzioHFcJ_aDiFIGsQU1aN8',
   snackBar: {},
   pokeDistanceList: [],
   username: '',

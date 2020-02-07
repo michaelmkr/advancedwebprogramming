@@ -36,25 +36,24 @@
 </template>
 
 <script>
-import { upgradeElement } from '@/tools';
 
-export default {
-  name: 'CardComponent',
-  props: {
-    depth: {
-      type: Number,
-      default: 2,
-      validator: value => [2, 3, 4, 6, 8, 16].includes(value),
+  export default {
+    name: 'MdlCard',
+    props: {
+      depth: {
+        type: Number,
+        default: 2,
+        validator: value => [2, 3, 4, 6, 8, 16].includes(value)
+      },
+      borderTitle: Boolean,
+      borderMedia: Boolean,
+      borderContent: Boolean,
+      borderActions: Boolean
     },
-    borderTitle: Boolean,
-    borderMedia: Boolean,
-    borderContent: Boolean,
-    borderActions: Boolean,
-  },
-  mounted() {
-    upgradeElement(this.$refs.card);
-  },
-};
+    mounted () {
+      // upgradeElement(this.$refs.card)
+    }
+  }
 </script>
 
 <style lang="scss" scoped>

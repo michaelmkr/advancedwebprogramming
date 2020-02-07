@@ -88,7 +88,6 @@ export default {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
-        console.log(`app${JSON.stringify(currentPosition)}`);
         this.checkIfItsNight(currentPosition);
       });
     },

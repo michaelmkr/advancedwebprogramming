@@ -94,7 +94,6 @@ export default {
           lng: position.coords.longitude,
         };
         this.center = currentPosition;
-        console.log(currentPosition);
         this.setPosition(currentPosition);
       });
     },
